@@ -1,66 +1,96 @@
-import { SymbolView } from 'expo-symbols';
-import { Link, Tabs } from 'expo-router';
-import { Platform, Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
+import React from 'react';
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { useAppTheme } from '@/hooks/useAppTheme';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { colors } = useAppTheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.tabInactive,
+        tabBarStyle: {
+          backgroundColor: colors.tabBar,
+          borderTopColor: colors.border,
+          height: 62,
+          paddingBottom: 8,
+          paddingTop: 6,
+        },
+        headerStyle: {
+          backgroundColor: colors.surface,
+        },
+        headerTintColor: colors.text,
+        headerShadowVisible: false,
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => (
-            <SymbolView
-              name={{
-                ios: 'chevron.left.forwardslash.chevron.right',
-                android: 'code',
-                web: 'code',
-              }}
-              tintColor={color}
-              size={28}
+          title: 'Home',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="home-outline"
+              size={size}
+              color={typeof color === 'string' ? color : colors.primary}
             />
-          ),
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable style={{ marginRight: 15 }}>
-                {({ pressed }) => (
-                  <SymbolView
-                    name={{ ios: 'info.circle', android: 'info', web: 'info' }}
-                    size={25}
-                    tintColor={Colors[colorScheme].text}
-                    style={{ opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
           ),
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="library"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => (
-            <SymbolView
-              name={{
-                ios: 'chevron.left.forwardslash.chevron.right',
-                android: 'code',
-                web: 'code',
-              }}
-              tintColor={color}
-              size={28}
+          title: 'Library',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="book-outline"
+              size={size}
+              color={typeof color === 'string' ? color : colors.primary}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="quiz"
+        options={{
+          title: 'Quizzes',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="help-buoy-outline"
+              size={size}
+              color={typeof color === 'string' ? color : colors.primary}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="progress"
+        options={{
+          title: 'Progress',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="stats-chart-outline"
+              size={size}
+              color={typeof color === 'string' ? color : colors.primary}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="settings-outline"
+              size={size}
+              color={typeof color === 'string' ? color : colors.primary}
             />
           ),
         }}

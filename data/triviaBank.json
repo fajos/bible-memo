@@ -1,0 +1,1138 @@
+[
+  {
+    "id": "ot_e_1",
+    "category": "Old Testament",
+    "difficulty": "easy",
+    "question": "On which day of creation did God create the sun, moon, and stars?",
+    "options": ["Day 2", "Day 3", "Day 4", "Day 5"],
+    "correctIndex": 2,
+    "reference": "Genesis 1:14-19",
+    "explanation": "God made the two great lights and the stars on the fourth day to divide day from night and mark seasons."
+  },
+  {
+    "id": "ot_e_2",
+    "category": "Old Testament",
+    "difficulty": "easy",
+    "question": "What sign did God place in the sky after the flood as a covenant never to flood the whole earth again?",
+    "options": ["A pillar of cloud", "A rainbow", "A burning bush", "A bright star"],
+    "correctIndex": 1,
+    "reference": "Genesis 9:13",
+    "explanation": "God set His bow in the cloud as a token of His covenant with Noah and every living creature."
+  },
+  {
+    "id": "ot_e_3",
+    "category": "Old Testament",
+    "difficulty": "easy",
+    "question": "What river did the Israelites cross on dry ground to enter the Promised Land under Joshua?",
+    "options": ["The Nile", "The Euphrates", "The Jordan", "The Tigris"],
+    "correctIndex": 2,
+    "reference": "Joshua 3:14-17",
+    "explanation": "When the priests carrying the ark stepped into the Jordan River, the waters stood still and Israel crossed on dry ground."
+  },
+  {
+    "id": "ot_e_4",
+    "category": "Old Testament",
+    "difficulty": "easy",
+    "question": "How many stones did David choose from the brook before facing Goliath?",
+    "options": ["One", "Three", "Five", "Seven"],
+    "correctIndex": 2,
+    "reference": "1 Samuel 17:40",
+    "explanation": "David chose five smooth stones out of the brook and put them in his shepherd's pouch, though he needed only one."
+  },
+  {
+    "id": "ot_e_5",
+    "category": "Old Testament",
+    "difficulty": "easy",
+    "question": "Who built the first permanent Temple in Jerusalem?",
+    "options": ["David", "Solomon", "Moses", "Hezekiah"],
+    "correctIndex": 1,
+    "reference": "1 Kings 6:1-2",
+    "explanation": "King David prepared materials, and his son King Solomon built the Temple in Jerusalem."
+  },
+  {
+    "id": "ot_m_1",
+    "category": "Old Testament",
+    "difficulty": "medium",
+    "question": "Which prophet confronted King Ahab and the prophets of Baal on Mount Carmel?",
+    "options": ["Elisha", "Elijah", "Isaiah", "Jeremiah"],
+    "correctIndex": 1,
+    "reference": "1 Kings 18:19-39",
+    "explanation": "Elijah challenged 450 prophets of Baal on Mount Carmel, and God answered Elijah's prayer with fire from heaven."
+  },
+  {
+    "id": "ot_m_2",
+    "category": "Old Testament",
+    "difficulty": "medium",
+    "question": "In Daniel 5, what mysterious event occurred during King Belshazzar's feast?",
+    "options": ["A statue spoke", "A hand wrote on the wall", "The palace roof collapsed", "Water turned to blood"],
+    "correctIndex": 1,
+    "reference": "Daniel 5:5-28",
+    "explanation": "Fingers of a human hand appeared and wrote 'MENE, MENE, TEKEL, UPHARSIN' on the plaster of the palace wall."
+  },
+  {
+    "id": "ot_m_3",
+    "category": "Old Testament",
+    "difficulty": "medium",
+    "question": "How many days did the walls of Jericho take to fall as Israel marched around the city?",
+    "options": ["3 days", "7 days", "12 days", "40 days"],
+    "correctIndex": 1,
+    "reference": "Joshua 6:15-20",
+    "explanation": "Israel marched once around Jericho for six days, and seven times on the seventh day before the walls fell."
+  },
+  {
+    "id": "ot_m_4",
+    "category": "Old Testament",
+    "difficulty": "medium",
+    "question": "What did God provide for the Israelites to eat each morning in the wilderness?",
+    "options": ["Unleavened barley loaves", "Manna", "Figs and olives", "Honeycomb"],
+    "correctIndex": 1,
+    "reference": "Exodus 16:14-31",
+    "explanation": "God rained bread from heaven, which the Israelites called manna ('What is it?')."
+  },
+  {
+    "id": "ot_m_5",
+    "category": "Old Testament",
+    "difficulty": "medium",
+    "question": "Which judge of Israel reduced his army from 32,000 down to 300 men at God's command?",
+    "options": ["Samson", "Gideon", "Deborah", "Jephthah"],
+    "correctIndex": 1,
+    "reference": "Judges 7:2-7",
+    "explanation": "God narrowed Gideon's army to 300 men who lapped water so Israel would know the victory came from the Lord."
+  },
+  {
+    "id": "ot_h_1",
+    "category": "Old Testament",
+    "difficulty": "hard",
+    "question": "Who were the two spies who brought back a faithful report urging Israel to enter Canaan?",
+    "options": ["Aaron and Hur", "Joshua and Caleb", "Phinehas and Eleazar", "Gad and Asher"],
+    "correctIndex": 1,
+    "reference": "Numbers 14:6-9",
+    "explanation": "Out of the twelve spies sent by Moses, only Joshua and Caleb urged Israel to trust the Lord and take the land."
+  },
+  {
+    "id": "ot_h_2",
+    "category": "Old Testament",
+    "difficulty": "hard",
+    "question": "Which king of Judah found the lost Book of the Law during Temple repairs and led a great reform?",
+    "options": ["Jehoshaphat", "Josiah", "Uzziah", "Asa"],
+    "correctIndex": 1,
+    "reference": "2 Kings 22:8-13",
+    "explanation": "Hilkiah the high priest found the Book of the Law during King Josiah's reign, sparking national repentance and Passover renewal."
+  },
+  {
+    "id": "ot_h_3",
+    "category": "Old Testament",
+    "difficulty": "hard",
+    "question": "How long did Nehemiah and the people take to rebuild the wall of Jerusalem?",
+    "options": ["40 days", "52 days", "70 days", "6 months"],
+    "correctIndex": 1,
+    "reference": "Nehemiah 6:15",
+    "explanation": "Despite fierce opposition, the wall was finished in fifty-two days on the twenty-fifth day of Elul."
+  },
+  {
+    "id": "ot_h_4",
+    "category": "Old Testament",
+    "difficulty": "hard",
+    "question": "At which place did Jacob dream of a ladder reaching to heaven with angels ascending and descending?",
+    "options": ["Hebron", "Bethel", "Shechem", "Beersheba"],
+    "correctIndex": 1,
+    "reference": "Genesis 28:11-19",
+    "explanation": "Jacob named that place Bethel ('House of God'), which was formerly called Luz."
+  },
+  {
+    "id": "ot_h_5",
+    "category": "Old Testament",
+    "difficulty": "hard",
+    "question": "Who was the prophetess and judge who led Israel alongside Barak against Sisera's army?",
+    "options": ["Miriam", "Deborah", "Huldah", "Hannah"],
+    "correctIndex": 1,
+    "reference": "Judges 4:4-14",
+    "explanation": "Deborah, a prophetess, judged Israel and summoned Barak to Mount Tabor to defeat Sisera."
+  },
+
+  {
+    "id": "nt_e_1",
+    "category": "New Testament",
+    "difficulty": "easy",
+    "question": "On which Jewish feast day was the Holy Spirit poured out upon the disciples in Acts 2?",
+    "options": ["Passover", "Pentecost", "Tabernacles", "Purim"],
+    "correctIndex": 1,
+    "reference": "Acts 2:1-4",
+    "explanation": "When the day of Pentecost had come, tongues like fire rested on the believers and they were filled with the Holy Spirit."
+  },
+  {
+    "id": "nt_e_2",
+    "category": "New Testament",
+    "difficulty": "easy",
+    "question": "On the road to which city did Saul encounter the risen Jesus in a bright light?",
+    "options": ["Antioch", "Damascus", "Corinth", "Ephesus"],
+    "correctIndex": 1,
+    "reference": "Acts 9:3-6",
+    "explanation": "As Saul neared Damascus, a light from heaven flashed around him and Jesus spoke to him."
+  },
+  {
+    "id": "nt_e_3",
+    "category": "New Testament",
+    "difficulty": "easy",
+    "question": "Which chapter in 1 Corinthians is famously known as the 'Love Chapter'?",
+    "options": ["1 Corinthians 10", "1 Corinthians 12", "1 Corinthians 13", "1 Corinthians 15"],
+    "correctIndex": 2,
+    "reference": "1 Corinthians 13:4-13",
+    "explanation": "1 Corinthians 13 describes patient, kind, enduring love and concludes that the greatest of faith, hope, and love is love."
+  },
+  {
+    "id": "nt_e_4",
+    "category": "New Testament",
+    "difficulty": "easy",
+    "question": "Who was the first Christian martyr, stoned while praying for his attackers?",
+    "options": ["Stephen", "James", "Philip", "Barnabas"],
+    "correctIndex": 0,
+    "reference": "Acts 7:55-60",
+    "explanation": "Stephen, one of the seven chosen servants, saw the heavens opened and prayed 'Lord, do not hold this sin against them.'"
+  },
+  {
+    "id": "nt_e_5",
+    "category": "New Testament",
+    "difficulty": "easy",
+    "question": "Which island was the Apostle John exiled to when he received the Revelation?",
+    "options": ["Cyprus", "Crete", "Patmos", "Malta"],
+    "correctIndex": 2,
+    "reference": "Revelation 1:9",
+    "explanation": "John wrote that he was on the island called Patmos because of the word of God and the testimony of Jesus."
+  },
+  {
+    "id": "nt_m_1",
+    "category": "New Testament",
+    "difficulty": "medium",
+    "question": "Which Roman centurion in Caesarea was the first Gentile household converted through Peter's preaching?",
+    "options": ["Julius", "Cornelius", "Sergius Paulus", "Claudius Lysias"],
+    "correctIndex": 1,
+    "reference": "Acts 10:1-48",
+    "explanation": "God sent an angel to Cornelius and a vision to Peter, opening the gospel door to the Gentiles."
+  },
+  {
+    "id": "nt_m_2",
+    "category": "New Testament",
+    "difficulty": "medium",
+    "question": "In Philippi, who were the two believers singing hymns in prison at midnight before an earthquake struck?",
+    "options": ["Peter and John", "Paul and Silas", "Paul and Barnabas", "Silas and Timothy"],
+    "correctIndex": 1,
+    "reference": "Acts 16:25-34",
+    "explanation": "Paul and Silas prayed and sang hymns, leading to the conversion of the Philippian jailer and his household."
+  },
+  {
+    "id": "nt_m_3",
+    "category": "New Testament",
+    "difficulty": "medium",
+    "question": "Which runaway slave did Paul urge Philemon to welcome back 'no longer as a slave, but... as a beloved brother'?",
+    "options": ["Tychicus", "Onesimus", "Epaphras", "Demas"],
+    "correctIndex": 1,
+    "reference": "Philemon 1:10-16",
+    "explanation": "Paul sent Onesimus back to Philemon in Colossae with a heartfelt letter asking for reconciliation."
+  },
+  {
+    "id": "nt_m_4",
+    "category": "New Testament",
+    "difficulty": "medium",
+    "question": "In Acts 17, which altar inscription in Athens did Paul use as a bridge to preach the Creator God?",
+    "options": ["To the Most High", "To an Unknown God", "To the Lord of Hosts", "To Eternal Wisdom"],
+    "correctIndex": 1,
+    "reference": "Acts 17:22-24",
+    "explanation": "Standing in the Areopagus, Paul cited an altar inscribed 'TO AN UNKNOWN GOD' to proclaim the true Creator."
+  },
+  {
+    "id": "nt_m_5",
+    "category": "New Testament",
+    "difficulty": "medium",
+    "question": "What trade did Paul share with Aquila and Priscilla in Corinth?",
+    "options": ["Carpentry", "Tentmaking", "Fishing", "Pottery"],
+    "correctIndex": 1,
+    "reference": "Acts 18:1-3",
+    "explanation": "Paul stayed and worked with Aquila and Priscilla because by trade they were tentmakers."
+  },
+  {
+    "id": "nt_h_1",
+    "category": "New Testament",
+    "difficulty": "hard",
+    "question": "Which church in Revelation was rebuked for being 'lukewarm, and neither cold nor hot'?",
+    "options": ["Sardis", "Philadelphia", "Laodicea", "Thyateira"],
+    "correctIndex": 2,
+    "reference": "Revelation 3:14-16",
+    "explanation": "Jesus warned the church in Laodicea about their spiritual complacency and urged them to be zealous and repent."
+  },
+  {
+    "id": "nt_h_2",
+    "category": "New Testament",
+    "difficulty": "hard",
+    "question": "Who actually wrote down the Epistle to the Romans as Paul dictated it?",
+    "options": ["Luke", "Tertius", "Sosthenes", "Titus"],
+    "correctIndex": 1,
+    "reference": "Romans 16:22",
+    "explanation": "In Romans 16:22, Tertius sends his own greeting: 'I Tertius, who wrote this letter, greet you in the Lord.'"
+  },
+  {
+    "id": "nt_h_3",
+    "category": "New Testament",
+    "difficulty": "hard",
+    "question": "Who replaced Judas Iscariot as the twelfth apostle in Acts 1?",
+    "options": ["Barnabas", "Barsabbas", "Matthias", "Silas"],
+    "correctIndex": 2,
+    "reference": "Acts 1:23-26",
+    "explanation": "After praying, the apostles cast lots between Joseph Barsabbas and Matthias, and the lot fell on Matthias."
+  },
+  {
+    "id": "nt_h_4",
+    "category": "New Testament",
+    "difficulty": "hard",
+    "question": "Where were the disciples first called 'Christians'?",
+    "options": ["Jerusalem", "Antioch", "Damascus", "Rome"],
+    "correctIndex": 1,
+    "reference": "Acts 11:26",
+    "explanation": "After Barnabas and Saul taught in Antioch for a whole year, the disciples were first called Christians there."
+  },
+  {
+    "id": "nt_h_5",
+    "category": "New Testament",
+    "difficulty": "hard",
+    "question": "On which island was Paul shipwrecked on his voyage to Rome, where a viper fastened on his hand?",
+    "options": ["Crete", "Malta", "Sicily", "Rhodes"],
+    "correctIndex": 1,
+    "reference": "Acts 28:1-6",
+    "explanation": "Paul and all 276 people aboard reached Malta safely; Paul shook the viper off into the fire unharmed."
+  },
+
+  {
+    "id": "g_e_1",
+    "category": "Gospels",
+    "difficulty": "easy",
+    "question": "In which town was Jesus born according to the Gospels?",
+    "options": ["Nazareth", "Bethlehem", "Capernaum", "Bethany"],
+    "correctIndex": 1,
+    "reference": "Luke 2:4-7",
+    "explanation": "Joseph and Mary traveled from Nazareth to Bethlehem, the city of David, where Jesus was born."
+  },
+  {
+    "id": "g_e_2",
+    "category": "Gospels",
+    "difficulty": "easy",
+    "question": "Who baptized Jesus in the Jordan River?",
+    "options": ["Peter", "John the Baptist", "Andrew", "Nicodemus"],
+    "correctIndex": 1,
+    "reference": "Matthew 3:13-17",
+    "explanation": "John the Baptist baptized Jesus in the Jordan, and the Spirit descended like a dove."
+  },
+  {
+    "id": "g_e_3",
+    "category": "Gospels",
+    "difficulty": "easy",
+    "question": "Which Gospel begins with the words, 'In the beginning was the Word, and the Word was with God'?",
+    "options": ["Matthew", "Mark", "Luke", "John"],
+    "correctIndex": 3,
+    "reference": "John 1:1",
+    "explanation": "The Gospel of John opens with a majestic prologue declaring Jesus as the eternal Word made flesh."
+  },
+  {
+    "id": "g_e_4",
+    "category": "Gospels",
+    "difficulty": "easy",
+    "question": "How many times did Peter deny knowing Jesus before the rooster crowed?",
+    "options": ["Once", "Twice", "Three times", "Four times"],
+    "correctIndex": 2,
+    "reference": "Luke 22:54-62",
+    "explanation": "Just as Jesus foretold, Peter denied Him three times before the rooster crowed."
+  },
+  {
+    "id": "g_e_5",
+    "category": "Gospels",
+    "difficulty": "easy",
+    "question": "Which short tax collector climbed a sycamore tree in Jericho to see Jesus?",
+    "options": ["Matthew", "Zacchaeus", "Bartimaeus", "Simon"],
+    "correctIndex": 1,
+    "reference": "Luke 19:1-6",
+    "explanation": "Zacchaeus climbed a sycamore-fig tree, and Jesus invited Himself to stay at Zacchaeus's house."
+  },
+  {
+    "id": "g_m_1",
+    "category": "Gospels",
+    "difficulty": "medium",
+    "question": "Which Gospel writer was a physician and companion of Paul?",
+    "options": ["Matthew", "Mark", "Luke", "John"],
+    "correctIndex": 2,
+    "reference": "Colossians 4:14",
+    "explanation": "Luke, called 'the beloved physician' in Colossians 4:14, wrote both the Gospel of Luke and the Book of Acts."
+  },
+  {
+    "id": "g_m_2",
+    "category": "Gospels",
+    "difficulty": "medium",
+    "question": "Which Pharisee came to Jesus by night and heard, 'You must be born again'?",
+    "options": ["Gamaliel", "Nicodemus", "Joseph of Arimathea", "Caiaphas"],
+    "correctIndex": 1,
+    "reference": "John 3:1-7",
+    "explanation": "Nicodemus, a ruler of the Jews, visited Jesus at night in John 3."
+  },
+  {
+    "id": "g_m_3",
+    "category": "Gospels",
+    "difficulty": "medium",
+    "question": "On the Mount of Transfiguration, which two Old Testament figures appeared talking with Jesus?",
+    "options": ["Abraham and David", "Moses and Elijah", "Isaiah and Jeremiah", "Enoch and Noah"],
+    "correctIndex": 1,
+    "reference": "Matthew 17:1-3",
+    "explanation": "Moses (representing the Law) and Elijah (representing the Prophets) appeared with the transfigured Jesus."
+  },
+  {
+    "id": "g_m_4",
+    "category": "Gospels",
+    "difficulty": "medium",
+    "question": "Who carried Jesus's cross partway to Golgotha when Jesus was exhausted?",
+    "options": ["Joseph of Arimathea", "Simon of Cyrene", "Barabbas", "Cleopas"],
+    "correctIndex": 1,
+    "reference": "Mark 15:21",
+    "explanation": "Roman soldiers compelled Simon of Cyrene, father of Alexander and Rufus, to carry Jesus's cross."
+  },
+  {
+    "id": "g_m_5",
+    "category": "Gospels",
+    "difficulty": "medium",
+    "question": "In the Sermon on the Mount, what are the opening blessings called?",
+    "options": ["The Ten Commandments", "The Beatitudes", "The Great Commission", "The Magnificat"],
+    "correctIndex": 1,
+    "reference": "Matthew 5:3-12",
+    "explanation": "The Beatitudes ('Blessed are...') open Jesus's Sermon on the Mount in Matthew 5."
+  },
+  {
+    "id": "g_h_1",
+    "category": "Gospels",
+    "difficulty": "hard",
+    "question": "In which village were two disciples walking when the risen Jesus joined them and opened the Scriptures?",
+    "options": ["Bethsaida", "Emmaus", "Cana", "Nain"],
+    "correctIndex": 1,
+    "reference": "Luke 24:13-32",
+    "explanation": "Cleopas and another disciple recognized Jesus in the breaking of bread on the road to Emmaus."
+  },
+  {
+    "id": "g_h_2",
+    "category": "Gospels",
+    "difficulty": "hard",
+    "question": "What was the name of the high priest's servant whose ear Peter struck off in Gethsemane?",
+    "options": ["Malchus", "Annas", "Chuza", "Theophilus"],
+    "correctIndex": 0,
+    "reference": "John 18:10",
+    "explanation": "John's Gospel names the servant Malchus, and Luke records that Jesus touched his ear and healed him."
+  },
+  {
+    "id": "g_h_3",
+    "category": "Gospels",
+    "difficulty": "hard",
+    "question": "Which two Gospel accounts record the genealogy of Jesus?",
+    "options": ["Mark and John", "Matthew and Luke", "Matthew and Mark", "Luke and John"],
+    "correctIndex": 1,
+    "reference": "Matthew 1:1-17; Luke 3:23-38",
+    "explanation": "Matthew traces Jesus's royal lineage from Abraham through David, while Luke traces it all the way back to Adam."
+  },
+  {
+    "id": "g_h_4",
+    "category": "Gospels",
+    "difficulty": "hard",
+    "question": "In Luke 1, who sang the song of praise beginning, 'My soul magnifies the Lord'?",
+    "options": ["Elizabeth", "Anna", "Mary", "Martha"],
+    "correctIndex": 2,
+    "reference": "Luke 1:46-55",
+    "explanation": "Mary spoke the Magnificat when she visited her relative Elizabeth."
+  },
+  {
+    "id": "g_h_5",
+    "category": "Gospels",
+    "difficulty": "hard",
+    "question": "At which pool in Jerusalem did Jesus heal a man who had been an invalid for 38 years?",
+    "options": ["Pool of Siloam", "Pool of Bethesda", "Spring of Gihon", "Pool of Solomon"],
+    "correctIndex": 1,
+    "reference": "John 5:2-9",
+    "explanation": "Near the Sheep Gate in Jerusalem lay the pool called Bethesda, where Jesus healed the man of 38 years."
+  },
+
+  {
+    "id": "c_e_1",
+    "category": "Characters",
+    "difficulty": "easy",
+    "question": "Who was sold into slavery by his jealous brothers and later became governor of Egypt?",
+    "options": ["Benjamin", "Joseph", "Judah", "Reuben"],
+    "correctIndex": 1,
+    "reference": "Genesis 37:28; 41:41",
+    "explanation": "Joseph's brothers sold him to traders going to Egypt, where God elevated him to save many lives during famine."
+  },
+  {
+    "id": "c_e_2",
+    "category": "Characters",
+    "difficulty": "easy",
+    "question": "Which Moabite woman stayed loyal to her mother-in-law Naomi, saying, 'Your people shall be my people'?",
+    "options": ["Esther", "Ruth", "Rahab", "Abigail"],
+    "correctIndex": 1,
+    "reference": "Ruth 1:16",
+    "explanation": "Ruth followed Naomi back to Bethlehem and became the great-grandmother of King David."
+  },
+  {
+    "id": "c_e_3",
+    "category": "Characters",
+    "difficulty": "easy",
+    "question": "Who was swallowed by a great fish after fleeing God's call to preach to Nineveh?",
+    "options": ["Amos", "Jonah", "Joel", "Micah"],
+    "correctIndex": 1,
+    "reference": "Jonah 1:17",
+    "explanation": "Jonah spent three days and three nights in the belly of the great fish before preaching in Nineveh."
+  },
+  {
+    "id": "c_e_4",
+    "category": "Characters",
+    "difficulty": "easy",
+    "question": "Which queen risked her life to approach the Persian king and save her people from Haman's plot?",
+    "options": ["Esther", "Vashti", "Deborah", "Miriam"],
+    "correctIndex": 0,
+    "reference": "Esther 4:14-16",
+    "explanation": "Mordecai encouraged Esther with the famous words, 'Who knows whether you have not come to the kingdom for such a time as this?'"
+  },
+  {
+    "id": "c_e_5",
+    "category": "Characters",
+    "difficulty": "easy",
+    "question": "Who was the brother of Moses who served as Israel's first High Priest?",
+    "options": ["Joshua", "Caleb", "Aaron", "Jethro"],
+    "correctIndex": 2,
+    "reference": "Exodus 28:1",
+    "explanation": "God appointed Aaron and his sons to serve in the priesthood of Israel."
+  },
+  {
+    "id": "c_m_1",
+    "category": "Characters",
+    "difficulty": "medium",
+    "question": "Who was the young mother of Samuel who prayed earnestly at Shiloh and dedicated her son to the Lord?",
+    "options": ["Sarah", "Rebekah", "Hannah", "Rachel"],
+    "correctIndex": 2,
+    "reference": "1 Samuel 1:10-28",
+    "explanation": "Hannah vowed to dedicate her child to God's service, and Samuel grew up serving under Eli the priest."
+  },
+  {
+    "id": "c_m_2",
+    "category": "Characters",
+    "difficulty": "medium",
+    "question": "What were the Hebrew names of Daniel's three friends thrown into the fiery furnace?",
+    "options": ["Shadrach, Meshach, Abednego", "Hananiah, Mishael, Azariah", "Elihu, Bildad, Zophar", "Shem, Ham, Japheth"],
+    "correctIndex": 1,
+    "reference": "Daniel 1:6-7",
+    "explanation": "Their original Hebrew names were Hananiah, Mishael, and Azariah; Babylon renamed them Shadrach, Meshach, and Abednego."
+  },
+  {
+    "id": "c_m_3",
+    "category": "Characters",
+    "difficulty": "medium",
+    "question": "Which woman in Jericho hid the two Israelite spies and hung a scarlet cord in her window?",
+    "options": ["Delilah", "Rahab", "Jael", "Tamar"],
+    "correctIndex": 1,
+    "reference": "Joshua 2:1-21",
+    "explanation": "By faith Rahab welcomed the spies in peace and was spared when Jericho fell."
+  },
+  {
+    "id": "c_m_4",
+    "category": "Characters",
+    "difficulty": "medium",
+    "question": "Which New Testament believer in Thyatira was a seller of purple cloth and opened her home to Paul?",
+    "options": ["Phoebe", "Lydia", "Priscilla", "Dorcas"],
+    "correctIndex": 1,
+    "reference": "Acts 16:14-15",
+    "explanation": "The Lord opened Lydia's heart in Philippi, and she and her household were baptized."
+  },
+  {
+    "id": "c_m_5",
+    "category": "Characters",
+    "difficulty": "medium",
+    "question": "Who was the wise counselor and son of Consolation who introduced Saul to the apostles and traveled with Paul?",
+    "options": ["Silas", "Barnabas", "Titus", "Apollos"],
+    "correctIndex": 1,
+    "reference": "Acts 4:36; 9:27",
+    "explanation": "Joseph, a Levite from Cyprus, was nicknamed Barnabas ('Son of Encouragement') by the apostles."
+  },
+  {
+    "id": "c_h_1",
+    "category": "Characters",
+    "difficulty": "hard",
+    "question": "Who was the priest-king of Salem who blessed Abram and received a tenth of everything?",
+    "options": ["Jethro", "Melchizedek", "Abimelech", "Balaam"],
+    "correctIndex": 1,
+    "reference": "Genesis 14:18-20",
+    "explanation": "Melchizedek, king of Salem and priest of God Most High, brought out bread and wine and blessed Abram."
+  },
+  {
+    "id": "c_h_2",
+    "category": "Characters",
+    "difficulty": "hard",
+    "question": "Which prophet married Gomer as a living symbol of God's faithful love toward unfaithful Israel?",
+    "options": ["Joel", "Hosea", "Zechariah", "Malachi"],
+    "correctIndex": 1,
+    "reference": "Hosea 1:2-3",
+    "explanation": "Hosea's marriage to Gomer dramatized God's steadfast covenant love for His wayward people."
+  },
+  {
+    "id": "c_h_3",
+    "category": "Characters",
+    "difficulty": "hard",
+    "question": "Which woman in Joppa, known for making tunics and garments for widows, was raised from the dead by Peter?",
+    "options": ["Rhoda", "Tabitha (Dorcas)", "Sapphira", "Chloe"],
+    "correctIndex": 1,
+    "reference": "Acts 9:36-41",
+    "explanation": "Tabitha, translated Dorcas, was full of good works and charity; Peter prayed and God restored her to life."
+  },
+  {
+    "id": "c_h_4",
+    "category": "Characters",
+    "difficulty": "hard",
+    "question": "Who were Timothy's mother and grandmother, praised by Paul for their sincere faith?",
+    "options": ["Lois and Eunice", "Mary and Martha", "Euodia and Syntyche", "Tryphena and Tryphosa"],
+    "correctIndex": 0,
+    "reference": "2 Timothy 1:5",
+    "explanation": "Paul reminded Timothy of the sincere faith that dwelt first in his grandmother Lois and his mother Eunice."
+  },
+  {
+    "id": "c_h_5",
+    "category": "Characters",
+    "difficulty": "hard",
+    "question": "Which Old Testament prophet was taken up to heaven in a whirlwind while his cloak fell to Elisha?",
+    "options": ["Enoch", "Elijah", "Samuel", "Ezekiel"],
+    "correctIndex": 1,
+    "reference": "2 Kings 2:11-13",
+    "explanation": "A chariot of fire and horses of fire separated them, and Elijah went up by a whirlwind into heaven."
+  },
+
+  {
+    "id": "b_e_1",
+    "category": "Books of the Bible",
+    "difficulty": "easy",
+    "question": "How many books are in the entire Protestant Christian Bible (Old and New Testaments)?",
+    "options": ["56", "60", "66", "72"],
+    "correctIndex": 2,
+    "reference": "Bible Canon",
+    "explanation": "There are 39 books in the Old Testament and 27 books in the New Testament, totaling 66 books."
+  },
+  {
+    "id": "b_e_2",
+    "category": "Books of the Bible",
+    "difficulty": "easy",
+    "question": "Which book of the Bible has the most chapters (150)?",
+    "options": ["Isaiah", "Psalms", "Genesis", "Jeremiah"],
+    "correctIndex": 1,
+    "reference": "Book of Psalms",
+    "explanation": "The Book of Psalms contains 150 sacred songs and prayers."
+  },
+  {
+    "id": "b_e_3",
+    "category": "Books of the Bible",
+    "difficulty": "easy",
+    "question": "What is the very last book of the Old Testament?",
+    "options": ["Zechariah", "Malachi", "Haggai", "Zephaniah"],
+    "correctIndex": 1,
+    "reference": "Malachi 4:5-6",
+    "explanation": "Malachi closes the Old Testament Canon with a promise of Elijah's coming before the day of the Lord."
+  },
+  {
+    "id": "b_e_4",
+    "category": "Books of the Bible",
+    "difficulty": "easy",
+    "question": "Which book immediately follows the four Gospels in the New Testament?",
+    "options": ["Romans", "Acts", "Hebrews", "1 Corinthians"],
+    "correctIndex": 1,
+    "reference": "Acts 1:1",
+    "explanation": "The Acts of the Apostles continues the story after Matthew, Mark, Luke, and John."
+  },
+  {
+    "id": "b_e_5",
+    "category": "Books of the Bible",
+    "difficulty": "easy",
+    "question": "Which book is famous for the line, 'To everything there is a season, and a time to every purpose under heaven'?",
+    "options": ["Proverbs", "Ecclesiastes", "Job", "Song of Solomon"],
+    "correctIndex": 1,
+    "reference": "Ecclesiastes 3:1",
+    "explanation": "Ecclesiastes 3:1-8 reflects on the appointed times and seasons of human life under God's sovereignty."
+  },
+  {
+    "id": "b_m_1",
+    "category": "Books of the Bible",
+    "difficulty": "medium",
+    "question": "Which are the first five books of the Bible, also called the Pentateuch or Torah?",
+    "options": [
+      "Genesis, Exodus, Leviticus, Numbers, Deuteronomy",
+      "Genesis, Exodus, Joshua, Judges, Ruth",
+      "Psalms, Proverbs, Ecclesiastes, Song of Solomon, Job",
+      "Matthew, Mark, Luke, John, Acts"
+    ],
+    "correctIndex": 0,
+    "reference": "Torah / Pentateuch",
+    "explanation": "The Pentateuch consists of Genesis, Exodus, Leviticus, Numbers, and Deuteronomy."
+  },
+  {
+    "id": "b_m_2",
+    "category": "Books of the Bible",
+    "difficulty": "medium",
+    "question": "Which is the shortest book in the Old Testament (only 1 chapter, 21 verses)?",
+    "options": ["Nahum", "Obadiah", "Haggai", "Jude"],
+    "correctIndex": 1,
+    "reference": "Obadiah 1:1-21",
+    "explanation": "Obadiah is a single-chapter prophetic book of 21 verses concerning Edom and the Kingdom of the Lord."
+  },
+  {
+    "id": "b_m_3",
+    "category": "Books of the Bible",
+    "difficulty": "medium",
+    "question": "Which Old Testament book never explicitly mentions the name of God, yet shows His providence throughout?",
+    "options": ["Ruth", "Esther", "Song of Solomon", "Nehemiah"],
+    "correctIndex": 1,
+    "reference": "Book of Esther",
+    "explanation": "The Book of Esther famously never mentions God's name directly while clearly displaying His sovereign rescue of Israel."
+  },
+  {
+    "id": "b_m_4",
+    "category": "Books of the Bible",
+    "difficulty": "medium",
+    "question": "Which New Testament book is known as the 'Faith Hall of Fame' in chapter 11?",
+    "options": ["Romans", "James", "Hebrews", "1 Peter"],
+    "correctIndex": 2,
+    "reference": "Hebrews 11",
+    "explanation": "Hebrews 11 recounts heroes of faith from Abel, Noah, and Abraham through Moses, Rahab, and David."
+  },
+  {
+    "id": "b_m_5",
+    "category": "Books of the Bible",
+    "difficulty": "medium",
+    "question": "Which four letters of Paul are commonly called the 'Prison Epistles'?",
+    "options": [
+      "Romans, 1 & 2 Corinthians, Galatians",
+      "Ephesians, Philippians, Colossians, Philemon",
+      "1 & 2 Thessalonians, 1 & 2 Timothy",
+      "Titus, Philemon, Hebrews, James"
+    ],
+    "correctIndex": 1,
+    "reference": "Ephesians 3:1; Philippians 1:13",
+    "explanation": "Paul wrote Ephesians, Philippians, Colossians, and Philemon while under imprisonment."
+  },
+  {
+    "id": "b_h_1",
+    "category": "Books of the Bible",
+    "difficulty": "hard",
+    "question": "Which book comes directly between Micah and Habakkuk in the Minor Prophets?",
+    "options": ["Jonah", "Nahum", "Zephaniah", "Joel"],
+    "correctIndex": 1,
+    "reference": "Old Testament Order",
+    "explanation": "The order of those Minor Prophets is Jonah, Micah, Nahum, Habakkuk, Zephaniah."
+  },
+  {
+    "id": "b_h_2",
+    "category": "Books of the Bible",
+    "difficulty": "hard",
+    "question": "Which two books in the New Testament contain only one chapter each besides Philemon and Jude?",
+    "options": ["2 Peter and 3 John", "2 John and 3 John", "Titus and 2 John", "James and 3 John"],
+    "correctIndex": 1,
+    "reference": "New Testament Epistles",
+    "explanation": "The four single-chapter New Testament books are Philemon, 2 John, 3 John, and Jude."
+  },
+  {
+    "id": "b_h_3",
+    "category": "Books of the Bible",
+    "difficulty": "hard",
+    "question": "Which prophetic book consists of five poetic laments over the fall of Jerusalem, four of them acrostics?",
+    "options": ["Ezekiel", "Lamentations", "Habakkuk", "Amos"],
+    "correctIndex": 1,
+    "reference": "Lamentations 1-5",
+    "explanation": "Lamentations contains five chapters mourning Jerusalem's destruction, with chapters 1–4 structured around the Hebrew alphabet."
+  },
+  {
+    "id": "b_h_4",
+    "category": "Books of the Bible",
+    "difficulty": "hard",
+    "question": "How many books are in the Minor Prophets (the Book of the Twelve)?",
+    "options": ["7", "10", "12", "14"],
+    "correctIndex": 2,
+    "reference": "Hosea through Malachi",
+    "explanation": "There are 12 Minor Prophets from Hosea to Malachi, called 'minor' because of length rather than importance."
+  },
+  {
+    "id": "b_h_5",
+    "category": "Books of the Bible",
+    "difficulty": "hard",
+    "question": "Which book of the Bible has the longest chapter (Chapter 119, with 176 verses)?",
+    "options": ["Isaiah", "Psalms", "Proverbs", "Numbers"],
+    "correctIndex": 1,
+    "reference": "Psalm 119",
+    "explanation": "Psalm 119 is an acrostic poem of 22 eight-verse stanzas celebrating God's Word."
+  },
+
+  {
+    "id": "m_e_1",
+    "category": "Miracles",
+    "difficulty": "easy",
+    "question": "What was the very first miraculous sign Jesus performed, as recorded in John 2?",
+    "options": [
+      "Healing a blind man",
+      "Turning water into wine",
+      "Feeding 5,000 people",
+      "Walking on water"
+    ],
+    "correctIndex": 1,
+    "reference": "John 2:1-11",
+    "explanation": "At a wedding in Cana of Galilee, Jesus turned six stone jars of water into fine wine."
+  },
+  {
+    "id": "m_e_2",
+    "category": "Miracles",
+    "difficulty": "easy",
+    "question": "With how many loaves and fish did Jesus feed the multitude of 5,000 men?",
+    "options": ["3 loaves and 2 fish", "5 loaves and 2 fish", "7 loaves and 3 fish", "12 loaves and 5 fish"],
+    "correctIndex": 1,
+    "reference": "John 6:9-13",
+    "explanation": "A boy had five barley loaves and two small fish, and after everyone ate, twelve baskets of leftovers remained."
+  },
+  {
+    "id": "m_e_3",
+    "category": "Miracles",
+    "difficulty": "easy",
+    "question": "How many days had Lazarus been in the tomb when Jesus raised him from the dead?",
+    "options": ["1 day", "2 days", "3 days", "4 days"],
+    "correctIndex": 3,
+    "reference": "John 11:39-44",
+    "explanation": "Lazarus had been dead four days when Jesus cried, 'Lazarus, come out!'"
+  },
+  {
+    "id": "m_e_4",
+    "category": "Miracles",
+    "difficulty": "easy",
+    "question": "Which disciple stepped out of the boat and briefly walked on water toward Jesus?",
+    "options": ["John", "Peter", "Thomas", "James"],
+    "correctIndex": 1,
+    "reference": "Matthew 14:28-31",
+    "explanation": "Peter walked on the water toward Jesus until he looked at the wind, began to sink, and Jesus caught him."
+  },
+  {
+    "id": "m_e_5",
+    "category": "Miracles",
+    "difficulty": "easy",
+    "question": "Which body of water did God part through Moses so the Israelites escaped Pharaoh's chariots?",
+    "options": ["Sea of Galilee", "Dead Sea", "Red Sea", "Mediterranean Sea"],
+    "correctIndex": 2,
+    "reference": "Exodus 14:21-22",
+    "explanation": "God drove the Red Sea back with a strong east wind so Israel walked through on dry ground."
+  },
+  {
+    "id": "m_m_1",
+    "category": "Miracles",
+    "difficulty": "medium",
+    "question": "How many lepers did Jesus cleanse in Luke 17, and how many returned to thank Him?",
+    "options": ["10 healed, 1 returned", "10 healed, 3 returned", "7 healed, 1 returned", "12 healed, 2 returned"],
+    "correctIndex": 0,
+    "reference": "Luke 17:11-19",
+    "explanation": "All ten were cleansed as they went to show themselves to the priests, but only one—a Samaritan—returned to give thanks."
+  },
+  {
+    "id": "m_m_2",
+    "category": "Miracles",
+    "difficulty": "medium",
+    "question": "How many times did Elisha tell Naaman the Syrian to wash in the Jordan River to be cured of leprosy?",
+    "options": ["Three times", "Five times", "Seven times", "Twelve times"],
+    "correctIndex": 2,
+    "reference": "2 Kings 5:10-14",
+    "explanation": "Naaman dipped himself seven times in the Jordan according to Elisha's word, and his flesh was restored."
+  },
+  {
+    "id": "m_m_3",
+    "category": "Miracles",
+    "difficulty": "medium",
+    "question": "In Mark 2, how did four friends get their paralyzed friend to Jesus inside a crowded house?",
+    "options": [
+      "Through a back garden gate",
+      "By lowering him through the roof",
+      "By waiting until midnight",
+      "Through the cellar stairs"
+    ],
+    "correctIndex": 1,
+    "reference": "Mark 2:3-12",
+    "explanation": "They uncovered the roof above Jesus and lowered the mat; Jesus saw their faith, forgave his sins, and healed him."
+  },
+  {
+    "id": "m_m_4",
+    "category": "Miracles",
+    "difficulty": "medium",
+    "question": "What did Jesus use when healing the man born blind in John 9 before telling him to wash in Siloam?",
+    "options": ["Olive oil", "Clay made with saliva", "Water from a jar", "A linen cloth"],
+    "correctIndex": 1,
+    "reference": "John 9:6-7",
+    "explanation": "Jesus made clay with His saliva, anointed the man's eyes, and told him to wash in the pool of Siloam."
+  },
+  {
+    "id": "m_m_5",
+    "category": "Miracles",
+    "difficulty": "medium",
+    "question": "What unusual miracle happened when Elisha's servant lost a borrowed iron axe head in the Jordan River?",
+    "options": [
+      "A fish carried it ashore",
+      "The iron axe head floated to the surface",
+      "The river dried up instantly",
+      "Another axe appeared on the bank"
+    ],
+    "correctIndex": 1,
+    "reference": "2 Kings 6:5-7",
+    "explanation": "Elisha threw a stick into the water where the axe head fell, and the iron floated so the man could pick it up."
+  },
+  {
+    "id": "m_h_1",
+    "category": "Miracles",
+    "difficulty": "hard",
+    "question": "Where did Jesus find the coin to pay the temple tax for Himself and Peter?",
+    "options": [
+      "Under a stone near Capernaum",
+      "In the mouth of the first fish Peter caught",
+      "Inside Judas's money bag",
+      "From a Roman tax booth"
+    ],
+    "correctIndex": 1,
+    "reference": "Matthew 17:27",
+    "explanation": "Jesus told Peter to cast a hook and open the mouth of the first fish he caught, where he found a four-drachma coin."
+  },
+  {
+    "id": "m_h_2",
+    "category": "Miracles",
+    "difficulty": "hard",
+    "question": "In Acts 20, which young man fell from a third-story window during Paul's long night sermon and was restored to life?",
+    "options": ["Eutychus", "Trophimus", "Aristarchus", "Jason"],
+    "correctIndex": 0,
+    "reference": "Acts 20:9-12",
+    "explanation": "Eutychus fell asleep in Troas and fell three stories; Paul went down, embraced him, and he was brought back alive."
+  },
+  {
+    "id": "m_h_3",
+    "category": "Miracles",
+    "difficulty": "hard",
+    "question": "At the gate called Beautiful in Acts 3, who healed the man lame from birth in Jesus's name?",
+    "options": ["Philip", "Peter and John", "Paul and Barnabas", "Stephen"],
+    "correctIndex": 1,
+    "reference": "Acts 3:1-8",
+    "explanation": "Peter said, 'Silver and gold I do not have, but what I have I give you: in the name of Jesus Christ of Nazareth, walk.'"
+  },
+  {
+    "id": "m_h_4",
+    "category": "Miracles",
+    "difficulty": "hard",
+    "question": "What sign did God give Hezekiah when Isaiah promised 15 more years of life?",
+    "options": [
+      "Dew on a fleece",
+      "The shadow on Ahaz's stairway moved backward ten steps",
+      "Rain in harvest season",
+      "Water poured from a dry rock"
+    ],
+    "correctIndex": 1,
+    "reference": "2 Kings 20:8-11",
+    "explanation": "God caused the shadow on the steps of Ahaz to go back ten steps as a sign to King Hezekiah."
+  },
+  {
+    "id": "m_h_5",
+    "category": "Miracles",
+    "difficulty": "hard",
+    "question": "In Luke 7, outside which town did Jesus raise a widow's only son from a funeral procession?",
+    "options": ["Cana", "Nain", "Bethphage", "Chorazin"],
+    "correctIndex": 1,
+    "reference": "Luke 7:11-15",
+    "explanation": "At the gate of Nain, Jesus had compassion on the grieving widow, touched the bier, and raised her son."
+  },
+
+  {
+    "id": "p_e_1",
+    "category": "Parables",
+    "difficulty": "easy",
+    "question": "In the Parable of the Good Samaritan, who stopped to care for the wounded traveler?",
+    "options": ["A priest", "A Levite", "A Samaritan", "A Roman soldier"],
+    "correctIndex": 2,
+    "reference": "Luke 10:30-37",
+    "explanation": "After both a priest and a Levite passed by, a Samaritan bandaged the man's wounds and paid for his care."
+  },
+  {
+    "id": "p_e_2",
+    "category": "Parables",
+    "difficulty": "easy",
+    "question": "In the Parable of the Lost Sheep, how many sheep did the shepherd leave behind to search for the one lost sheep?",
+    "options": ["49", "70", "99", "100"],
+    "correctIndex": 2,
+    "reference": "Luke 15:4-7",
+    "explanation": "The shepherd leaves the 99 in the wilderness to go after the one that is lost until he finds it."
+  },
+  {
+    "id": "p_e_3",
+    "category": "Parables",
+    "difficulty": "easy",
+    "question": "In the Parable of the Prodigal Son, what did the father give his returning younger son?",
+    "options": [
+      "A servant's quarters",
+      "The best robe, a ring, and sandals",
+      "Half of the elder brother's land",
+      "A small tent outside the gate"
+    ],
+    "correctIndex": 1,
+    "reference": "Luke 15:22-24",
+    "explanation": "Overjoyed, the father ran, embraced him, and called for the best robe, a ring, sandals, and a feast."
+  },
+  {
+    "id": "p_e_4",
+    "category": "Parables",
+    "difficulty": "easy",
+    "question": "In the Parable of the Wise and Foolish Builders, what did the wise man build his house upon?",
+    "options": ["Sand", "Clay", "Rock", "Timber"],
+    "correctIndex": 2,
+    "reference": "Matthew 7:24-27",
+    "explanation": "Everyone who hears Jesus's words and does them is like a wise man who built his house on the rock."
+  },
+  {
+    "id": "p_e_5",
+    "category": "Parables",
+    "difficulty": "easy",
+    "question": "To what tiny seed did Jesus compare the Kingdom of Heaven, which grows into a large tree for birds?",
+    "options": ["Wheat seed", "Mustard seed", "Olive pit", "Fig seed"],
+    "correctIndex": 1,
+    "reference": "Matthew 13:31-32",
+    "explanation": "Though the mustard seed is tiny, when grown it becomes a tree where the birds of the air nest."
+  },
+  {
+    "id": "p_m_1",
+    "category": "Parables",
+    "difficulty": "medium",
+    "question": "In the Parable of the Sower, what do the seeds that fell among thorns represent?",
+    "options": [
+      "People who never understand",
+      "People choked by worries, riches, and pleasures of life",
+      "People who bear 100-fold fruit",
+      "People who endure persecution boldly"
+    ],
+    "correctIndex": 1,
+    "reference": "Luke 8:14; Matthew 13:22",
+    "explanation": "The thorns represent the cares of this world and the deceitfulness of riches that choke the word."
+  },
+  {
+    "id": "p_m_2",
+    "category": "Parables",
+    "difficulty": "medium",
+    "question": "In the Parable of the Ten Virgins, why were five of them called foolish?",
+    "options": [
+      "They went to the wrong house",
+      "They took lamps but brought no extra oil",
+      "They left before sunset",
+      "They forgot their wedding garments"
+    ],
+    "correctIndex": 1,
+    "reference": "Matthew 25:1-13",
+    "explanation": "The five foolish virgins took their lamps without extra oil in flasks, teaching disciples to stay spiritually watchful."
+  },
+  {
+    "id": "p_m_3",
+    "category": "Parables",
+    "difficulty": "medium",
+    "question": "In the Parable of the Talents, what did the servant given one talent do with it?",
+    "options": [
+      "Gave it to the poor",
+      "Dug a hole and hid it in the ground",
+      "Put it with the bankers",
+      "Bought a field with it"
+    ],
+    "correctIndex": 1,
+    "reference": "Matthew 25:18-25",
+    "explanation": "Out of fear, the one-talent servant buried his master's silver in the ground instead of putting it to work."
+  },
+  {
+    "id": "p_m_4",
+    "category": "Parables",
+    "difficulty": "medium",
+    "question": "In Luke 18, what did the tax collector pray in the Temple while beating his breast?",
+    "options": [
+      "I thank you I am not like other men",
+      "God, be merciful to me, a sinner",
+      "Lord, remember my tithes and fasts",
+      "Let me sit at your right hand"
+    ],
+    "correctIndex": 1,
+    "reference": "Luke 18:13-14",
+    "explanation": "Jesus said the humble tax collector went home justified rather than the boastful Pharisee."
+  },
+  {
+    "id": "p_m_5",
+    "category": "Parables",
+    "difficulty": "medium",
+    "question": "In Matthew 13, what did the merchant sell everything he owned to buy?",
+    "options": [
+      "A vineyard on a hill",
+      "One pearl of great price",
+      "A golden lampstand",
+      "A flock of sheep"
+    ],
+    "correctIndex": 1,
+    "reference": "Matthew 13:45-46",
+    "explanation": "Like the hidden treasure in a field, the pearl of great price illustrates the surpassing worth of God's Kingdom."
+  },
+  {
+    "id": "p_h_1",
+    "category": "Parables",
+    "difficulty": "hard",
+    "question": "In the Parable of the Workers in the Vineyard, how much did the laborers hired at the eleventh hour receive?",
+    "options": [
+      "One-twelfth of a denarius",
+      "Half a denarius",
+      "A full denarius, the same as the first",
+      "Two denarii"
+    ],
+    "correctIndex": 2,
+    "reference": "Matthew 20:9-15",
+    "explanation": "Each worker received one denarius, illustrating the landowner's generous grace rather than mere merit."
+  },
+  {
+    "id": "p_h_2",
+    "category": "Parables",
+    "difficulty": "hard",
+    "question": "In the Parable of the Lost Coin, how many silver coins (drachmas) did the woman originally have?",
+    "options": ["Two", "Five", "Ten", "Twelve"],
+    "correctIndex": 2,
+    "reference": "Luke 15:8-10",
+    "explanation": "She had ten silver coins, lost one, lit a lamp, and swept the house carefully until she found it."
+  },
+  {
+    "id": "p_h_3",
+    "category": "Parables",
+    "difficulty": "hard",
+    "question": "In the Parable of the Wheat and the Tares (Weeds), when did the householder tell his servants to separate them?",
+    "options": [
+      "Immediately after sprouting",
+      "Before the spring rains",
+      "At the harvest",
+      "After the sheep grazed"
+    ],
+    "correctIndex": 2,
+    "reference": "Matthew 13:28-30",
+    "explanation": "He told them to let both grow together until the harvest so they would not uproot the wheat along with the weeds."
+  },
+  {
+    "id": "p_h_4",
+    "category": "Parables",
+    "difficulty": "hard",
+    "question": "In Luke 16, why did Abraham tell the rich man that Lazarus could not cross over to comfort him?",
+    "options": [
+      "Because it was the Sabbath",
+      "Because a great chasm was fixed between them",
+      "Because the angels barred the gate",
+      "Because his brothers had not repented"
+    ],
+    "correctIndex": 1,
+    "reference": "Luke 16:26",
+    "explanation": "Abraham explained that between them a great chasm has been fixed so no one can cross from either side."
+  },
+  {
+    "id": "p_h_5",
+    "category": "Parables",
+    "difficulty": "hard",
+    "question": "In the Parable of the Unmerciful Servant, how many times did Jesus tell Peter we should forgive a brother?",
+    "options": ["Seven times", "Twelve times", "Seventy times seven (or seventy-seven times)", "Once a week"],
+    "correctIndex": 2,
+    "reference": "Matthew 18:21-22",
+    "explanation": "Jesus answered Peter not up to seven times, but seventy times seven—calling for limitless forgiveness."
+  }
+]

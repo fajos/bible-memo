@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bible-memo",
+    "name": "Selah Scripture Memory",
     "slug": "bible-memo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,7 +21,7 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "server",
+      "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -31,12 +31,32 @@
         {
           "image": "./assets/images/splash-icon.png",
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#FAF6EE"
         }
-      ]
+      ],
+      "expo-sqlite",
+      "expo-sharing",
+      "expo-notifications"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "e58c3b0f-fc05-44f7-849d-5e701014455b"
+      }
+    },
+    "owner": "fajostheprince",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e58c3b0f-fc05-44f7-849d-5e701014455b"
     }
   }
 }

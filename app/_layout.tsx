@@ -1,56 +1,115 @@
-import { useFonts } from 'expo-font';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import * as Updates from 'expo-updates';
+import React, { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/components/useColorScheme';
+import { BadgeBanner } from '@/components/BadgeBanner';
+import { useAppTheme } from '@/hooks/useAppTheme';
+import { useAppStore } from '@/store/useAppStore';
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+export { ErrorBoundary } from 'expo-router';
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   anchor: '(tabs)',
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+  const initApp = useAppStore((s) => s.initApp);
+  const initialized = useAppStore((s) => s.initialized);
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    async function checkStartupUpdate() {
+      if (!Updates.isEnabled) return;
+      try {
+        const update = await Updates.checkForUpdateAsync();
+        if (update.isAvailable) {
+          await Updates.fetchUpdateAsync();
+        }
+      } catch {
+        // Silently ignore network or dev errors
+      }
     }
-  }, [loaded]);
+    void checkStartupUpdate();
+  }, []);
 
-  if (!loaded) {
+  useEffect(() => {
+    void initApp();
+  }, [initApp]);
+
+  useEffect(() => {
+    if (fontError) throw fontError;
+  }, [fontError]);
+
+  useEffect(() => {
+    if (fontsLoaded && initialized) {
+      SplashScreen.hideAsync().catch(() => {});
+    }
+  }, [fontsLoaded, initialized]);
+
+  if (!fontsLoaded || !initialized) {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return <RootNavigator />;
 }
 
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+function RootNavigator() {
+  const { isDark, colors } = useAppTheme();
+
+  const navTheme = isDark
+    ? {
+        ...DarkTheme,
+        colors: {
+          ...DarkTheme.colors,
+          background: colors.background,
+          card: colors.surface,
+          text: colors.text,
+          border: colors.border,
+          primary: colors.primary,
+        },
+      }
+    : {
+        ...DefaultTheme,
+        colors: {
+          ...DefaultTheme.colors,
+          background: colors.background,
+          card: colors.surface,
+          text: colors.text,
+          border: colors.border,
+          primary: colors.primary,
+        },
+      };
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+    <ThemeProvider value={navTheme}>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: colors.surface },
+          headerTintColor: colors.text,
+          headerShadowVisible: false,
+          contentStyle: { backgroundColor: colors.background },
+        }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="review" options={{ title: 'Daily Review' }} />
+        <Stack.Screen name="learn/[verseId]" options={{ title: 'Learn Verse' }} />
+        <Stack.Screen name="deck/[id]" options={{ title: 'Deck' }} />
+        <Stack.Screen name="verse-quiz" options={{ title: 'Verse Quiz' }} />
+        <Stack.Screen name="trivia" options={{ title: 'Bible Trivia' }} />
+        <Stack.Screen
+          name="share-card"
+          options={{ title: 'Share Verse Card', presentation: 'modal' }}
+        />
       </Stack>
+      <BadgeBanner />
     </ThemeProvider>
   );
 }
