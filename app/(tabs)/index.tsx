@@ -145,7 +145,7 @@ export default function HomeScreen() {
               {dueVerses.length > 0 ? (
                 <Pressable
                   onPress={() => router.push('/review')}
-                  style={[styles.heroPrimaryBtn, { backgroundColor: '#FFFDF9' }]}>
+                  style={[styles.heroPrimaryBtn, { backgroundColor: colors.surfaceElevated }]}>
                   <Ionicons name="play" size={18} color={colors.primary} />
                   <Text style={[styles.heroPrimaryText, { color: colors.primary }]}>
                     Start Daily Review
@@ -154,7 +154,7 @@ export default function HomeScreen() {
               ) : (
                 <Pressable
                   onPress={() => router.push('/(tabs)/library')}
-                  style={[styles.heroPrimaryBtn, { backgroundColor: '#FFFDF9' }]}>
+                  style={[styles.heroPrimaryBtn, { backgroundColor: colors.surfaceElevated }]}>
                   <Ionicons name="book-outline" size={18} color={colors.primary} />
                   <Text style={[styles.heroPrimaryText, { color: colors.primary }]}>
                     Browse Verse Decks

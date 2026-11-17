@@ -25,7 +25,7 @@ export const STARTER_PACKS: StarterPackSeed[] = [
     name: 'Salvation',
     description: 'Core gospel verses on grace, redemption, and eternal life in Christ.',
     icon: 'heart',
-    color: '#B83A3A',
+    color: '#DC2626',
     verses: [
       { bookIndex: 42, chapter: 3, verseStart: 16, verseEnd: 16 }, // John 3:16
       { bookIndex: 44, chapter: 3, verseStart: 23, verseEnd: 23 }, // Romans 3:23
@@ -41,7 +41,7 @@ export const STARTER_PACKS: StarterPackSeed[] = [
     name: 'Peace & Anxiety',
     description: 'Rest in God’s peace when worry, fear, or restlessness press in.',
     icon: 'leaf',
-    color: '#2E7D5B',
+    color: '#059669',
     verses: [
       { bookIndex: 49, chapter: 4, verseStart: 6, verseEnd: 7 },  // Philippians 4:6-7
       { bookIndex: 22, chapter: 26, verseStart: 3, verseEnd: 3 }, // Isaiah 26:3
@@ -57,7 +57,7 @@ export const STARTER_PACKS: StarterPackSeed[] = [
     name: 'Promises',
     description: 'Faithful promises of guidance, mercy, and steadfast love.',
     icon: 'sunny',
-    color: '#C48324',
+    color: '#D97706',
     verses: [
       { bookIndex: 23, chapter: 29, verseStart: 11, verseEnd: 11 }, // Jeremiah 29:11
       { bookIndex: 44, chapter: 8, verseStart: 28, verseEnd: 28 },  // Romans 8:28
@@ -73,7 +73,7 @@ export const STARTER_PACKS: StarterPackSeed[] = [
     name: 'Armor of God',
     description: 'Stand firm in spiritual battle with Ephesians 6.',
     icon: 'shield',
-    color: '#2B4C7E',
+    color: '#2563EB',
     verses: [
       { bookIndex: 48, chapter: 6, verseStart: 10, verseEnd: 11 }, // Eph 6:10-11
       { bookIndex: 48, chapter: 6, verseStart: 13, verseEnd: 13 }, // Eph 6:13
@@ -89,7 +89,7 @@ export const STARTER_PACKS: StarterPackSeed[] = [
     name: 'Faith',
     description: 'Walk by faith, trust the unseen, and live rooted in the Word.',
     icon: 'flame',
-    color: '#7B4FA3',
+    color: '#7C3AED',
     verses: [
       { bookIndex: 57, chapter: 11, verseStart: 1, verseEnd: 1 },  // Hebrews 11:1
       { bookIndex: 57, chapter: 11, verseStart: 6, verseEnd: 6 },  // Hebrews 11:6
@@ -105,7 +105,7 @@ export const STARTER_PACKS: StarterPackSeed[] = [
     name: 'Strength',
     description: 'Courage and renewal when your own strength runs low.',
     icon: 'flash',
-    color: '#1F6E8C',
+    color: '#0891B2',
     verses: [
       { bookIndex: 5, chapter: 1, verseStart: 9, verseEnd: 9 },    // Joshua 1:9
       { bookIndex: 49, chapter: 4, verseStart: 13, verseEnd: 13 }, // Philippians 4:13

@@ -26,7 +26,7 @@ import { useAppStore } from '@/store/useAppStore';
 
 type LibraryTab = 'decks' | 'bible' | 'search';
 
-const DECK_COLORS = ['#2B4C7E', '#2E7D5B', '#C48324', '#B83A3A', '#7B4FA3', '#1F6E8C'];
+const DECK_COLORS = ['#2563EB', '#059669', '#D97706', '#DC2626', '#7C3AED', '#0891B2'];
 const DECK_ICONS = ['bookmarks', 'heart', 'shield', 'sunny', 'leaf', 'flame'];
 
 export default function LibraryScreen() {
@@ -50,6 +50,7 @@ export default function LibraryScreen() {
   const [selectedChapter, setSelectedChapter] = useState(3);
   const [rangeStart, setRangeStart] = useState<number | null>(16);
   const [rangeEnd, setRangeEnd] = useState<number | null>(16);
+  const [isMultiSelect, setIsMultiSelect] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -79,19 +80,63 @@ export default function LibraryScreen() {
 
   const todayKey = toLocalDateKey();
 
+  const handleVerseLongPress = (verseNum: number) => {
+    setIsMultiSelect(true);
+    setRangeStart(verseNum);
+    setRangeEnd(verseNum);
+    setToast(`Multi-verse mode on (v${verseNum}). Tap another verse to set range.`);
+  };
+
   const handleSelectVerseTap = (verseNum: number) => {
-    if (rangeStart === null) {
+    // 1. If NOT in multi-select mode:
+    // A single tap ALWAYS selects ONLY that single verse!
+    if (!isMultiSelect) {
       setRangeStart(verseNum);
       setRangeEnd(verseNum);
-    } else if (rangeStart === rangeEnd && verseNum !== rangeStart) {
-      const s = Math.min(rangeStart, verseNum);
-      const e = Math.max(rangeStart, verseNum);
-      // Cap range at 10 verses so memorization cards stay practical
-      setRangeStart(s);
-      setRangeEnd(Math.min(e, s + 9));
+      return;
+    }
+
+    // 2. If in multi-select mode:
+    if (rangeStart === null || rangeEnd === null) {
+      setRangeStart(verseNum);
+      setRangeEnd(verseNum);
+      return;
+    }
+
+    // If only one verse was selected in multi-select mode and the user taps it again, toggle off multi-select
+    if (verseNum === rangeStart && rangeStart === rangeEnd) {
+      setIsMultiSelect(false);
+      setToast('Returned to single verse mode');
+      return;
+    }
+
+    // Tapping inside the current range adjusts boundaries:
+    if (verseNum > rangeStart && verseNum < rangeEnd) {
+      setRangeEnd(verseNum);
+      return;
+    }
+    if (verseNum === rangeEnd && rangeEnd > rangeStart) {
+      setRangeEnd(rangeEnd - 1);
+      return;
+    }
+    if (verseNum === rangeStart && rangeEnd > rangeStart) {
+      setRangeStart(rangeStart + 1);
+      return;
+    }
+
+    // Extend selection:
+    const s = Math.min(rangeStart, verseNum);
+    const e = Math.max(rangeEnd, verseNum);
+    if (e - s >= 10) {
+      if (verseNum > rangeStart) {
+        setRangeEnd(rangeStart + 9);
+      } else {
+        setRangeStart(rangeEnd - 9);
+      }
+      setToast('Range capped at 10 verses for effective memorization');
     } else {
-      setRangeStart(verseNum);
-      setRangeEnd(verseNum);
+      setRangeStart(s);
+      setRangeEnd(e);
     }
   };
 
@@ -294,6 +339,7 @@ export default function LibraryScreen() {
                       setSelectedChapter(1);
                       setRangeStart(1);
                       setRangeEnd(1);
+                      setIsMultiSelect(false);
                     }}
                     style={[
                       styles.bookChip,
@@ -330,6 +376,7 @@ export default function LibraryScreen() {
                       setSelectedChapter(ch);
                       setRangeStart(1);
                       setRangeEnd(1);
+                      setIsMultiSelect(false);
                     }}
                     style={[
                       styles.chapChip,
@@ -352,9 +399,100 @@ export default function LibraryScreen() {
             </ScrollView>
           </View>
 
-          <Text style={[styles.rangeHint, { color: colors.textMuted }]}>
-            Tap a verse, or tap a second verse to select a range (e.g. John 3:16-18).
-          </Text>
+          {/* Range Selection Control Bar */}
+          <View
+            style={[
+              styles.rangeControlRow,
+              { backgroundColor: colors.surface, borderColor: colors.border },
+            ]}>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+              <Ionicons
+                name={
+                  isMultiSelect ||
+                  (rangeStart !== null && rangeEnd !== null && rangeEnd > rangeStart)
+                    ? 'layers'
+                    : 'book-outline'
+                }
+                size={16}
+                color={colors.primary}
+              />
+              <Text
+                style={[styles.rangeHintText, { color: colors.textSecondary }]}
+                numberOfLines={1}>
+                {rangeStart !== null && rangeEnd !== null && rangeEnd > rangeStart
+                  ? `Verses ${rangeStart}–${rangeEnd} (${rangeEnd - rangeStart + 1} selected)`
+                  : isMultiSelect
+                  ? 'Multi-select: tap another verse (up to 10)'
+                  : 'Tap to select • Hold down to multi-select'}
+              </Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+              {isMultiSelect ? (
+                <>
+                  {rangeStart !== null && rangeEnd !== null && rangeEnd > rangeStart ? (
+                    <>
+                      <Pressable
+                        onPress={() => {
+                          setRangeEnd(rangeStart);
+                          setIsMultiSelect(false);
+                        }}
+                        style={[styles.miniRangeBtn, { backgroundColor: colors.surfaceMuted }]}>
+                        <Text style={[styles.miniRangeBtnText, { color: colors.textSecondary }]}>
+                          Single
+                        </Text>
+                      </Pressable>
+                      <Pressable
+                        onPress={() => {
+                          setIsMultiSelect(false);
+                          setToast(`Range v${rangeStart}–${rangeEnd} set`);
+                        }}
+                        style={[styles.miniRangeBtn, { backgroundColor: colors.primary }]}>
+                        <Ionicons name="checkmark" size={13} color={colors.primaryText} />
+                        <Text style={[styles.miniRangeBtnText, { color: colors.primaryText }]}>
+                          Done
+                        </Text>
+                      </Pressable>
+                    </>
+                  ) : (
+                    <Pressable
+                      onPress={() => setIsMultiSelect(false)}
+                      style={[styles.miniRangeBtn, { backgroundColor: colors.surfaceMuted }]}>
+                      <Ionicons name="close" size={13} color={colors.textSecondary} />
+                      <Text style={[styles.miniRangeBtnText, { color: colors.textSecondary }]}>
+                        Cancel
+                      </Text>
+                    </Pressable>
+                  )}
+                </>
+              ) : (
+                <>
+                  {rangeStart !== null && rangeEnd !== null && rangeEnd > rangeStart && (
+                    <Pressable
+                      onPress={() => {
+                        setRangeEnd(rangeStart);
+                      }}
+                      style={[styles.miniRangeBtn, { backgroundColor: colors.surfaceMuted }]}>
+                      <Text style={[styles.miniRangeBtnText, { color: colors.textSecondary }]}>
+                        Single
+                      </Text>
+                    </Pressable>
+                  )}
+                  <Pressable
+                    onPress={() => {
+                      setIsMultiSelect(true);
+                      setToast('Multi-verse mode on: Tap another verse to set range');
+                    }}
+                    style={[styles.miniRangeBtn, { backgroundColor: colors.surfaceMuted }]}>
+                    <Ionicons name="add" size={13} color={colors.text} />
+                    <Text style={[styles.miniRangeBtnText, { color: colors.text }]}>
+                      Multi-Select
+                    </Text>
+                  </Pressable>
+                </>
+              )}
+            </View>
+          </View>
 
           {/* Verses List */}
           <ScrollView contentContainerStyle={styles.chapterPad} showsVerticalScrollIndicator={false}>
@@ -369,6 +507,8 @@ export default function LibraryScreen() {
                 <Pressable
                   key={v.verse}
                   onPress={() => handleSelectVerseTap(v.verse)}
+                  onLongPress={() => handleVerseLongPress(v.verse)}
+                  delayLongPress={500}
                   style={[
                     styles.bibleVerseRow,
                     {
@@ -402,10 +542,51 @@ export default function LibraryScreen() {
               ]}>
               <View style={{ flex: 1 }}>
                 <Text style={[styles.selectionRef, { color: colors.text }]}>{selectedRef}</Text>
-                <Text style={[styles.selectionSub, { color: colors.textMuted }]}>
-                  {translation} • {selectedEnd - selectedStart + 1} verse
-                  {selectedEnd > selectedStart ? 's' : ''}
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 2 }}>
+                  <Text style={[styles.selectionSub, { color: colors.textMuted }]}>
+                    {translation} • {selectedEnd - selectedStart + 1} verse
+                    {selectedEnd > selectedStart ? 's' : ''}
+                  </Text>
+
+                  {/* Range Stepper */}
+                  <View style={styles.inlineStepper}>
+                    <Pressable
+                      onPress={() => {
+                        if (selectedEnd > selectedStart) {
+                          setRangeEnd(selectedEnd - 1);
+                        }
+                      }}
+                      disabled={selectedEnd <= selectedStart}
+                      style={{ opacity: selectedEnd <= selectedStart ? 0.35 : 1, padding: 1 }}>
+                      <Ionicons
+                        name="remove-circle-outline"
+                        size={17}
+                        color={colors.textSecondary}
+                      />
+                    </Pressable>
+                    <Pressable
+                      onPress={() => {
+                        if (
+                          selectedEnd < chapterVerses.length &&
+                          selectedEnd - selectedStart < 9
+                        ) {
+                          setRangeEnd(selectedEnd + 1);
+                        }
+                      }}
+                      disabled={
+                        selectedEnd >= chapterVerses.length || selectedEnd - selectedStart >= 9
+                      }
+                      style={{
+                        opacity:
+                          selectedEnd >= chapterVerses.length || selectedEnd - selectedStart >= 9
+                            ? 0.35
+                            : 1,
+                        padding: 1,
+                      }}>
+                      <Ionicons name="add-circle-outline" size={17} color={colors.primary} />
+                    </Pressable>
+                  </View>
+                </View>
               </View>
 
               <Pressable
@@ -632,6 +813,7 @@ export default function LibraryScreen() {
             ? formatReference(searchPick.bookIndex, searchPick.chapter, searchPick.verse, searchPick.verse)
             : selectedRef;
           setToast(exists ? `${ref} is already in ${dName}.` : `Added ${ref} to ${dName}!`);
+          setIsMultiSelect(false);
           setTimeout(() => setToast(null), 3000);
         }}
       />
@@ -736,6 +918,41 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     alignItems: 'center',
+  },
+  rangeControlRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    marginHorizontal: 16,
+    marginBottom: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  rangeHintText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  miniRangeBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  miniRangeBtnText: {
+    fontSize: 11.5,
+    fontWeight: '700',
+  },
+  inlineStepper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+    backgroundColor: 'rgba(0,0,0,0.03)',
+    borderRadius: 8,
+    paddingHorizontal: 2,
   },
   rangeHint: {
     fontSize: 12,

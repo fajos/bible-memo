@@ -96,14 +96,15 @@ function RootNavigator() {
           headerStyle: { backgroundColor: colors.surface },
           headerTintColor: colors.text,
           headerShadowVisible: false,
+          headerBackTitle: 'Back',
           contentStyle: { backgroundColor: colors.background },
         }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="review" options={{ title: 'Daily Review' }} />
-        <Stack.Screen name="learn/[verseId]" options={{ title: 'Learn Verse' }} />
-        <Stack.Screen name="deck/[id]" options={{ title: 'Deck' }} />
-        <Stack.Screen name="verse-quiz" options={{ title: 'Verse Quiz' }} />
-        <Stack.Screen name="trivia" options={{ title: 'Bible Trivia' }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'Back' }} />
+        <Stack.Screen name="review" options={{ title: 'Daily Review', headerBackTitle: 'Back' }} />
+        <Stack.Screen name="learn/[verseId]" options={{ title: 'Learn Verse', headerBackTitle: 'Back' }} />
+        <Stack.Screen name="deck/[id]" options={{ title: 'Deck', headerBackTitle: 'Back' }} />
+        <Stack.Screen name="verse-quiz" options={{ title: 'Verse Quiz', headerBackTitle: 'Back' }} />
+        <Stack.Screen name="trivia" options={{ title: 'Bible Trivia', headerBackTitle: 'Back' }} />
         <Stack.Screen
           name="share-card"
           options={{ title: 'Share Verse Card', presentation: 'modal' }}

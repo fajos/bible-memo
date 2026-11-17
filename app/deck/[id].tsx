@@ -61,7 +61,7 @@ export default function DeckDetailScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Stack.Screen options={{ title: deck.name }} />
+      <Stack.Screen options={{ title: deck.name, headerBackTitle: 'Back' }} />
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         {/* Deck Hero */}
         <View

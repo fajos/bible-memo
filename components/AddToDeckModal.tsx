@@ -24,7 +24,7 @@ interface AddToDeckModalProps {
   onAdded?: (deckName: string, alreadyExists: boolean) => void;
 }
 
-const DECK_COLORS = ['#2B4C7E', '#2E7D5B', '#C48324', '#B83A3A', '#7B4FA3', '#1F6E8C'];
+const DECK_COLORS = ['#2563EB', '#059669', '#D97706', '#DC2626', '#7C3AED', '#0891B2'];
 
 export function AddToDeckModal({
   visible,

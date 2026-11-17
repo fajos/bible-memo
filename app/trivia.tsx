@@ -159,7 +159,7 @@ export default function TriviaScreen() {
     const pct = Math.round((score / denom) * 100);
     return (
       <View style={[styles.centered, { backgroundColor: colors.background }]}>
-        <Stack.Screen options={{ title }} />
+        <Stack.Screen options={{ title, headerBackTitle: 'Back' }} />
         <View style={[styles.scoreCircle, { backgroundColor: colors.accentSoft }]}>
           <Text style={[styles.scoreBig, { color: colors.accent }]}>{pct}%</Text>
         </View>
@@ -200,7 +200,7 @@ export default function TriviaScreen() {
     <ScrollView
       style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.content}>
-      <Stack.Screen options={{ title }} />
+      <Stack.Screen options={{ title, headerBackTitle: 'Back' }} />
 
       {/* Top Metadata */}
       <View style={styles.topRow}>

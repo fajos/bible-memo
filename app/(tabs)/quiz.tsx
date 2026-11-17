@@ -191,10 +191,10 @@ export default function QuizHubScreen() {
               <View
                 style={[
                   styles.warningBox,
-                  { backgroundColor: '#FFF3CD', borderColor: '#FFEEBA' },
+                  { backgroundColor: colors.warningSoft, borderColor: `${colors.warning}40` },
                 ]}>
-                <Ionicons name="alert-circle" size={18} color="#856404" />
-                <Text style={[styles.warningText, { color: '#856404' }]}>
+                <Ionicons name="alert-circle" size={18} color={colors.warning} />
+                <Text style={[styles.warningText, { color: colors.warning }]}>
                   This deck has 0 verses. Add verses to it from the Library tab before taking quizzes.
                 </Text>
               </View>
