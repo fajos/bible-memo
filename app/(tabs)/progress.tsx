@@ -5,8 +5,11 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { MasteryPill } from '@/components/MasteryPill';
+import { ActivityHeatmap } from '@/components/ActivityHeatmap';
+import { ReviewForecastChart } from '@/components/ReviewForecastChart';
 import { BADGE_DEFINITIONS } from '@/data/badges';
 import { useAppTheme } from '@/hooks/useAppTheme';
+import { hapticSelection } from '@/lib/haptics';
 import { useAppStore } from '@/store/useAppStore';
 
 export default function ProgressScreen() {
@@ -138,6 +141,12 @@ export default function ProgressScreen() {
           </View>
         </View>
 
+        {/* 7-Day Spaced Repetition Review Forecast */}
+        <ReviewForecastChart verses={verses} />
+
+        {/* 12-Week Activity Heatmap */}
+        <ActivityHeatmap activity={dailyActivity} />
+
         {/* Milestone Badges */}
         <Text style={[styles.sectionTitle, { color: colors.text }]}>
           Milestone Badges ({badges.length}/{BADGE_DEFINITIONS.length})
@@ -183,9 +192,10 @@ export default function ProgressScreen() {
             {weakestVerses.map((v) => (
               <Pressable
                 key={v.id}
-                onPress={() =>
-                  router.push({ pathname: '/learn/[verseId]', params: { verseId: v.id } })
-                }
+                onPress={() => {
+                  hapticSelection();
+                  router.push({ pathname: '/learn/[verseId]', params: { verseId: v.id } });
+                }}
                 style={[
                   styles.verseStatRow,
                   { backgroundColor: colors.surface, borderColor: colors.border },
@@ -207,9 +217,10 @@ export default function ProgressScreen() {
         {masteredOrActive.map((v) => (
           <Pressable
             key={v.id}
-            onPress={() =>
-              router.push({ pathname: '/learn/[verseId]', params: { verseId: v.id } })
-            }
+            onPress={() => {
+              hapticSelection();
+              router.push({ pathname: '/learn/[verseId]', params: { verseId: v.id } });
+            }}
             style={[
               styles.verseStatRow,
               { backgroundColor: colors.surface, borderColor: colors.border },

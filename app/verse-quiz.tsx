@@ -5,6 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { useAppTheme } from '@/hooks/useAppTheme';
+import { hapticError, hapticLight, hapticSuccess } from '@/lib/haptics';
 import { generateVerseQuiz } from '@/lib/verseQuiz';
 import { useAppStore } from '@/store/useAppStore';
 import type { VerseQuizMode } from '@/types/models';
@@ -85,9 +86,11 @@ export default function VerseQuizScreen() {
   const handleAnswerResult = async (isCorrect: boolean, verseId: string) => {
     setAnswered(isCorrect);
     if (isCorrect) {
+      hapticSuccess();
       setScore((s) => s + 1);
       await recordVerseReview(verseId, 'good', 'quiz');
     } else {
+      hapticError();
       setMissedIds((prev) => (prev.includes(verseId) ? prev : [...prev, verseId]));
       await flagQuizMiss(verseId);
     }
@@ -116,11 +119,13 @@ export default function VerseQuizScreen() {
 
   const handleNext = async () => {
     if (idx + 1 < questions.length) {
+      hapticLight();
       setIdx((i) => i + 1);
       setAnswered(null);
       setSelectedOpt(null);
       setPickedChunks([]);
     } else {
+      hapticSuccess();
       const durationSec = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
       await recordQuizSession({
         quizType: 'verse',

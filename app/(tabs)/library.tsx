@@ -657,8 +657,50 @@ export default function LibraryScreen() {
                   Search Full {translation} Bible
                 </Text>
                 <Text style={[styles.emptySub, { color: colors.textMuted }]}>
-                  Type a keyword or reference like “Romans 8:28” or “courage”.
+                  Type a keyword or reference like “Romans 8:28” or tap a topic below:
                 </Text>
+
+                {/* Quick Topic Chips */}
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: 8,
+                    marginTop: 14,
+                    paddingHorizontal: 8,
+                  }}>
+                  {[
+                    'Peace',
+                    'Anxiety',
+                    'Faith',
+                    'Love',
+                    'Strength',
+                    'Salvation',
+                    'Wisdom',
+                    'Hope',
+                    'Grace',
+                    'Forgiveness',
+                    'Courage',
+                    'Praise',
+                  ].map((topic) => (
+                    <Pressable
+                      key={topic}
+                      onPress={() => setSearchQuery(topic)}
+                      style={{
+                        paddingHorizontal: 12,
+                        paddingVertical: 7,
+                        borderRadius: 20,
+                        backgroundColor: colors.surface,
+                        borderWidth: 1,
+                        borderColor: colors.border,
+                      }}>
+                      <Text style={{ fontSize: 13, fontWeight: '700', color: colors.primary }}>
+                        #{topic}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </View>
               </View>
             ) : searchResults.length === 0 ? (
               <View style={styles.emptyState}>

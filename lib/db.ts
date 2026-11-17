@@ -23,6 +23,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   reminderHour: 8,
   reminderMinute: 0,
   hasSharedCard: false,
+  hapticsEnabled: true,
 };
 
 interface PersistedSnapshot {
@@ -149,7 +150,18 @@ async function getNativeDb(): Promise<SQLite.SQLiteDatabase> {
           key TEXT PRIMARY KEY NOT NULL,
           value TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS auto_snapshots (
+          id TEXT PRIMARY KEY NOT NULL,
+          created_at TEXT NOT NULL,
+          payload TEXT NOT NULL
+        );
       `);
+      try {
+        await db.execAsync('ALTER TABLE verses ADD COLUMN notes TEXT;');
+      } catch {}
+      try {
+        await db.execAsync('ALTER TABLE verses ADD COLUMN tags TEXT;');
+      } catch {}
       return db;
     })();
   }
@@ -276,6 +288,8 @@ export async function initializeAndLoadSnapshot(): Promise<PersistedSnapshot> {
     total_reviews: number;
     correct_reviews: number;
     learned: number;
+    notes: string | null;
+    tags: string | null;
     created_at: string;
   }>('SELECT * FROM verses ORDER BY created_at ASC');
 
@@ -346,6 +360,8 @@ export async function initializeAndLoadSnapshot(): Promise<PersistedSnapshot> {
       totalReviews: r.total_reviews,
       correctReviews: r.correct_reviews,
       learned: r.learned === 1,
+      notes: r.notes ?? undefined,
+      tags: r.tags ? (JSON.parse(r.tags) as string[]) : undefined,
       createdAt: r.created_at,
     })),
     reviewLogs: logRows.map((r) => ({
@@ -416,8 +432,8 @@ export async function dbUpsertVerse(v: MemorizedVerse): Promise<void> {
     `INSERT OR REPLACE INTO verses (
       id, deck_id, book_index, book_name, chapter, verse_start, verse_end, reference,
       ease, interval, repetitions, due_date, last_reviewed_at, mastery,
-      total_reviews, correct_reviews, learned, created_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      total_reviews, correct_reviews, learned, notes, tags, created_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     v.id,
     v.deckId,
     v.bookIndex,
@@ -435,6 +451,8 @@ export async function dbUpsertVerse(v: MemorizedVerse): Promise<void> {
     v.totalReviews,
     v.correctReviews,
     v.learned ? 1 : 0,
+    v.notes ?? null,
+    v.tags ? JSON.stringify(v.tags) : null,
     v.createdAt
   );
 }
@@ -618,4 +636,75 @@ export async function dbRestoreBackup(payload: BackupPayload): Promise<void> {
       JSON.stringify({ ...DEFAULT_SETTINGS, ...payload.settings })
     );
   });
+}
+
+export interface AutoSnapshotMeta {
+  id: string;
+  createdAt: string;
+  versesCount: number;
+}
+
+export async function dbSaveAutoSnapshot(payload: BackupPayload): Promise<void> {
+  if (Platform.OS === 'web') return;
+  const db = await getNativeDb();
+  const id = `snap_${Date.now()}`;
+  const nowIso = new Date().toISOString();
+  await db.runAsync(
+    'INSERT INTO auto_snapshots (id, created_at, payload) VALUES (?, ?, ?)',
+    id,
+    nowIso,
+    JSON.stringify(payload)
+  );
+
+  // Keep only the most recent 5 snapshots
+  const all = await db.getAllAsync<{ id: string }>(
+    'SELECT id FROM auto_snapshots ORDER BY created_at DESC'
+  );
+  if (all.length > 5) {
+    const toDelete = all.slice(5);
+    for (const s of toDelete) {
+      await db.runAsync('DELETE FROM auto_snapshots WHERE id = ?', s.id);
+    }
+  }
+}
+
+export async function dbGetAutoSnapshots(): Promise<AutoSnapshotMeta[]> {
+  if (Platform.OS === 'web') return [];
+  const db = await getNativeDb();
+  const rows = await db.getAllAsync<{ id: string; created_at: string; payload: string }>(
+    'SELECT id, created_at, payload FROM auto_snapshots ORDER BY created_at DESC'
+  );
+  return rows.map((r) => {
+    let count = 0;
+    try {
+      const parsed = JSON.parse(r.payload) as BackupPayload;
+      count = parsed.verses?.length ?? 0;
+    } catch {}
+    return {
+      id: r.id,
+      createdAt: r.created_at,
+      versesCount: count,
+    };
+  });
+}
+
+export async function dbRestoreAutoSnapshot(id: string): Promise<PersistedSnapshot | null> {
+  if (Platform.OS === 'web') return null;
+  const db = await getNativeDb();
+  const row = await db.getFirstAsync<{ payload: string }>(
+    'SELECT payload FROM auto_snapshots WHERE id = ?',
+    id
+  );
+  if (!row) return null;
+  const payload = JSON.parse(row.payload) as BackupPayload;
+  await dbRestoreBackup(payload);
+  return {
+    decks: payload.decks,
+    verses: payload.verses,
+    reviewLogs: payload.reviewLogs,
+    quizSessions: payload.quizSessions,
+    dailyActivity: payload.dailyActivity,
+    badges: payload.badges,
+    settings: { ...DEFAULT_SETTINGS, ...payload.settings },
+  };
 }

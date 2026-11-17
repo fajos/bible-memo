@@ -7,6 +7,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import triviaBankRaw from '@/data/triviaBank.json';
 import { useAppTheme } from '@/hooks/useAppTheme';
 import { toLocalDateKey } from '@/lib/date';
+import { hapticError, hapticLight, hapticSuccess } from '@/lib/haptics';
 import { useAppStore } from '@/store/useAppStore';
 import type { TriviaQuestion } from '@/types/models';
 
@@ -130,15 +131,20 @@ export default function TriviaScreen() {
     setSelectedOpt(optIdx);
     setAnsweredCount((c) => c + 1);
     if (optIdx === current.correctIndex) {
+      hapticSuccess();
       setScore((s) => s + 1);
+    } else {
+      hapticError();
     }
   };
 
   const handleNext = async () => {
     if (idx + 1 < questions.length) {
+      hapticLight();
       setIdx((i) => i + 1);
       setSelectedOpt(null);
     } else {
+      hapticSuccess();
       if (mode !== 'timed') {
         const durationSec = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
         await recordQuizSession({

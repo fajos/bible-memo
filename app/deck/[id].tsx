@@ -5,8 +5,10 @@ import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from '
 
 import { MasteryPill } from '@/components/MasteryPill';
 import { useAppTheme } from '@/hooks/useAppTheme';
+import { exportDeckCsvAsync, exportDeckPrintableTextAsync } from '@/lib/backup';
 import { getVerseText } from '@/lib/bible';
 import { toLocalDateKey } from '@/lib/date';
+import { hapticSelection, hapticSuccess } from '@/lib/haptics';
 import { useAppStore } from '@/store/useAppStore';
 
 export default function DeckDetailScreen() {
@@ -126,6 +128,54 @@ export default function DeckDetailScreen() {
               </Pressable>
             )}
           </View>
+
+          {/* Export Deck Options */}
+          {deckVerses.length > 0 && (
+            <View
+              style={{
+                flexDirection: 'row',
+                gap: 8,
+                paddingTop: 10,
+                borderTopWidth: 1,
+                borderTopColor: colors.border,
+              }}>
+              <Pressable
+                onPress={async () => {
+                  hapticSelection();
+                  try {
+                    await exportDeckCsvAsync(deck, deckVerses, translation);
+                    hapticSuccess();
+                  } catch (e) {
+                    if (Platform.OS !== 'web') Alert.alert('Export Failed', String(e));
+                  }
+                }}
+                style={[
+                  styles.miniActionBtn,
+                  { backgroundColor: colors.surfaceMuted, borderColor: colors.border },
+                ]}>
+                <Ionicons name="document-text-outline" size={14} color={colors.text} />
+                <Text style={[styles.miniActionText, { color: colors.text }]}>Export CSV (Anki)</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={async () => {
+                  hapticSelection();
+                  try {
+                    await exportDeckPrintableTextAsync(deck, deckVerses, translation);
+                    hapticSuccess();
+                  } catch (e) {
+                    if (Platform.OS !== 'web') Alert.alert('Export Failed', String(e));
+                  }
+                }}
+                style={[
+                  styles.miniActionBtn,
+                  { backgroundColor: colors.surfaceMuted, borderColor: colors.border },
+                ]}>
+                <Ionicons name="print-outline" size={14} color={colors.text} />
+                <Text style={[styles.miniActionText, { color: colors.text }]}>Printable Cards</Text>
+              </Pressable>
+            </View>
+          )}
         </View>
 
         <View style={styles.listHeader}>
@@ -288,4 +338,15 @@ const styles = StyleSheet.create({
   },
   dueMeta: { fontSize: 12, fontWeight: '600' },
   verseActionLinks: { flexDirection: 'row', gap: 14 },
+  miniActionBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 5,
+    paddingVertical: 8,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  miniActionText: { fontSize: 11.5, fontWeight: '700' },
 });

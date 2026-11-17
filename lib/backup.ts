@@ -3,8 +3,9 @@ import { File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { Platform } from 'react-native';
 
+import { getVerseText } from '@/lib/bible';
 import { toLocalDateKey } from '@/lib/date';
-import type { BackupPayload } from '@/types/models';
+import type { BackupPayload, Deck, MemorizedVerse, Translation } from '@/types/models';
 
 export async function exportBackupJsonAsync(payload: BackupPayload): Promise<void> {
   const filename = `selah-backup-${toLocalDateKey()}.json`;
@@ -35,6 +36,106 @@ export async function exportBackupJsonAsync(payload: BackupPayload): Promise<voi
     mimeType: 'application/json',
     dialogTitle: 'Export Scripture Memory Backup',
     UTI: 'public.json',
+  });
+}
+
+export async function exportDeckCsvAsync(
+  deck: Deck,
+  verses: MemorizedVerse[],
+  translation: Translation
+): Promise<void> {
+  const header = 'Reference,Text,Translation,Deck,Mastery,Learned,Notes\n';
+  const rows = verses.map((v) => {
+    const text = getVerseText(translation, v.bookIndex, v.chapter, v.verseStart, v.verseEnd)
+      .replace(/"/g, '""');
+    const notes = (v.notes ?? '').replace(/"/g, '""');
+    return `"${v.reference}","${text}","${translation}","${deck.name}",${v.mastery}%,${v.learned ? 'Yes' : 'No'},"${notes}"`;
+  });
+
+  const csv = header + rows.join('\n');
+  const safeDeckName = deck.name.replace(/[^a-zA-Z0-9_-]/g, '_');
+  const filename = `${safeDeckName}-verses.csv`;
+
+  if (Platform.OS === 'web') {
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    return;
+  }
+
+  const file = new File(Paths.cache, filename);
+  file.create({ overwrite: true });
+  await file.write(csv);
+
+  const canShare = await Sharing.isAvailableAsync();
+  if (!canShare) {
+    throw new Error('Sharing is not available on this device.');
+  }
+  await Sharing.shareAsync(file.uri, {
+    mimeType: 'text/csv',
+    dialogTitle: `Export ${deck.name} (CSV)`,
+    UTI: 'public.comma-separated-values-text',
+  });
+}
+
+export async function exportDeckPrintableTextAsync(
+  deck: Deck,
+  verses: MemorizedVerse[],
+  translation: Translation
+): Promise<void> {
+  const lines: string[] = [
+    `============================================================`,
+    ` SELAH SCRIPTURE MEMORY: ${deck.name.toUpperCase()}`,
+    ` ${verses.length} Verses • Translation: ${translation} • Date: ${toLocalDateKey()}`,
+    `============================================================\n`,
+  ];
+
+  verses.forEach((v, idx) => {
+    const text = getVerseText(translation, v.bookIndex, v.chapter, v.verseStart, v.verseEnd);
+    lines.push(`CARD #${idx + 1}`);
+    lines.push(`REFERENCE: ${v.reference}`);
+    lines.push(`TEXT: ${text}`);
+    if (v.notes) {
+      lines.push(`NOTES: ${v.notes}`);
+    }
+    lines.push(`------------------------------------------------------------\n`);
+  });
+
+  const fullText = lines.join('\n');
+  const safeDeckName = deck.name.replace(/[^a-zA-Z0-9_-]/g, '_');
+  const filename = `${safeDeckName}-printable.txt`;
+
+  if (Platform.OS === 'web') {
+    const blob = new Blob([fullText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    return;
+  }
+
+  const file = new File(Paths.cache, filename);
+  file.create({ overwrite: true });
+  await file.write(fullText);
+
+  const canShare = await Sharing.isAvailableAsync();
+  if (!canShare) {
+    throw new Error('Sharing is not available on this device.');
+  }
+  await Sharing.shareAsync(file.uri, {
+    mimeType: 'text/plain',
+    dialogTitle: `Printable Flashcards: ${deck.name}`,
+    UTI: 'public.plain-text',
   });
 }
 
@@ -91,6 +192,7 @@ export async function pickAndParseBackupAsync(): Promise<BackupPayload | null> {
       reminderHour: 8,
       reminderMinute: 0,
       hasSharedCard: false,
+      hapticsEnabled: true,
     },
   };
 }

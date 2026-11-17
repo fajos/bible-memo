@@ -60,6 +60,8 @@ export interface MemorizedVerse {
   totalReviews: number;
   correctReviews: number;
   learned: boolean;
+  notes?: string;
+  tags?: string[];
   createdAt: string;
 }
 
@@ -113,6 +115,7 @@ export interface AppSettings {
   reminderHour: number;
   reminderMinute: number;
   hasSharedCard: boolean;
+  hapticsEnabled: boolean;
 }
 
 export interface StreakInfo {

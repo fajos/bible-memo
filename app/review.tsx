@@ -9,6 +9,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MasteryPill } from '@/components/MasteryPill';
 import { useAppTheme } from '@/hooks/useAppTheme';
 import { getVerseText } from '@/lib/bible';
+import {
+  hapticLight,
+  hapticMedium,
+  hapticSelection,
+  hapticSuccess,
+} from '@/lib/haptics';
 import { previewIntervalLabels } from '@/lib/sm2';
 import { useAppStore } from '@/store/useAppStore';
 import type { MemorizedVerse, ReviewRating } from '@/types/models';
@@ -71,11 +77,16 @@ export default function DailyReviewScreen() {
   };
 
   const handleNextHint = () => {
+    hapticLight();
     setHintCount((c) => Math.min(words.length, c + 1));
   };
 
   const handleRating = async (rating: ReviewRating) => {
     if (!currentVerse) return;
+
+    if (rating === 'again') hapticLight();
+    else if (rating === 'hard') hapticMedium();
+    else hapticSuccess();
 
     await recordVerseReview(currentVerse.id, rating, 'review');
     setSessionCompletedCount((c) => c + 1);
@@ -95,6 +106,7 @@ export default function DailyReviewScreen() {
         setCurrentIndex((i) => i + 1);
       } else {
         // Queue finished
+        hapticSuccess();
         setCurrentIndex(queue.length);
       }
     }
@@ -200,17 +212,36 @@ export default function DailyReviewScreen() {
 
               {/* Passage text or recitation prompt */}
               {revealed ? (
-                <Text
-                  style={[
-                    styles.fullPassage,
-                    {
-                      color: colors.text,
-                      fontSize: verseTypography.fontSize,
-                      lineHeight: verseTypography.lineHeight + 4,
-                    },
-                  ]}>
-                  “{fullText}”
-                </Text>
+                <View style={{ gap: 10 }}>
+                  <Text
+                    style={[
+                      styles.fullPassage,
+                      {
+                        color: colors.text,
+                        fontSize: verseTypography.fontSize,
+                        lineHeight: verseTypography.lineHeight + 4,
+                      },
+                    ]}>
+                    “{fullText}”
+                  </Text>
+                  {Boolean(currentVerse.notes) && (
+                    <View
+                      style={{
+                        padding: 10,
+                        backgroundColor: colors.surfaceMuted,
+                        borderRadius: 10,
+                        borderLeftWidth: 3,
+                        borderLeftColor: colors.primary,
+                      }}>
+                      <Text style={{ fontSize: 11, fontWeight: '700', color: colors.primary }}>
+                        MY NOTES:
+                      </Text>
+                      <Text style={{ fontSize: 13, color: colors.textSecondary, marginTop: 2 }}>
+                        {currentVerse.notes}
+                      </Text>
+                    </View>
+                  )}
+                </View>
               ) : hintCount > 0 ? (
                 <View style={styles.hintContainer}>
                   <Text
@@ -251,7 +282,10 @@ export default function DailyReviewScreen() {
                 </Pressable>
 
                 <Pressable
-                  onPress={() => setRevealed((v) => !v)}
+                  onPress={() => {
+                    hapticSelection();
+                    setRevealed((v) => !v);
+                  }}
                   style={[
                     styles.revealBtn,
                     { backgroundColor: revealed ? colors.surfaceMuted : colors.primary },

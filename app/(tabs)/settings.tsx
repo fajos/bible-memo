@@ -15,6 +15,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAppTheme } from '@/hooks/useAppTheme';
 import { formatTimeLabel } from '@/lib/date';
+import type { AutoSnapshotMeta } from '@/lib/db';
+import { hapticSelection, hapticSuccess } from '@/lib/haptics';
 import { sendTestReminderAsync } from '@/lib/notifications';
 import {
   applyUpdateAsync,
@@ -32,11 +34,53 @@ export default function SettingsScreen() {
   const updateSettings = useAppStore((s) => s.updateSettings);
   const exportBackup = useAppStore((s) => s.exportBackup);
   const importBackup = useAppStore((s) => s.importBackup);
+  const createLocalSnapshot = useAppStore((s) => s.createLocalSnapshot);
+  const getAutoSnapshots = useAppStore((s) => s.getAutoSnapshots);
+  const restoreLocalSnapshot = useAppStore((s) => s.restoreLocalSnapshot);
 
   const [statusMsg, setStatusMsg] = useState<string | null>(null);
   const [checkingUpdate, setCheckingUpdate] = useState(false);
   const [updateReady, setUpdateReady] = useState(false);
+  const [snapshots, setSnapshots] = useState<AutoSnapshotMeta[]>([]);
   const updateInfo = getUpdateStatus();
+
+  React.useEffect(() => {
+    void getAutoSnapshots().then(setSnapshots);
+  }, [getAutoSnapshots]);
+
+  const handleCreateSnapshot = async () => {
+    hapticSelection();
+    try {
+      await createLocalSnapshot();
+      const updated = await getAutoSnapshots();
+      setSnapshots(updated);
+      hapticSuccess();
+      showStatus('Local snapshot created successfully!');
+    } catch (err) {
+      showStatus(err instanceof Error ? err.message : 'Snapshot failed.');
+    }
+  };
+
+  const handleRestoreSnapshot = async (id: string) => {
+    hapticSelection();
+    const confirm = async () => {
+      const ok = await restoreLocalSnapshot(id);
+      if (ok) {
+        hapticSuccess();
+        showStatus('Snapshot restored! Your decks & verses are restored.');
+      } else {
+        showStatus('Failed to restore snapshot.');
+      }
+    };
+    if (Platform.OS === 'web') {
+      void confirm();
+      return;
+    }
+    Alert.alert('Restore Snapshot', 'Restore data from this local snapshot?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Restore', style: 'default', onPress: () => void confirm() },
+    ]);
+  };
 
   const showStatus = (msg: string) => {
     setStatusMsg(msg);
@@ -238,6 +282,31 @@ export default function SettingsScreen() {
           </Text>
         </View>
 
+        {/* Tactile Feel / Haptics */}
+        <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>TACTILE FEEL</Text>
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: colors.surface, borderColor: colors.border },
+          ]}>
+          <View style={styles.switchRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.cardTitle, { color: colors.text }]}>Haptic Feedback</Text>
+              <Text style={[styles.cardSub, { color: colors.textSecondary }]}>
+                Tactile vibrations for keyboard typing recall, card flips, and quiz results
+              </Text>
+            </View>
+            <Switch
+              value={settings.hapticsEnabled !== false}
+              onValueChange={(val) => {
+                hapticSelection();
+                void updateSettings({ hapticsEnabled: val });
+              }}
+              trackColor={{ false: colors.surfaceMuted, true: colors.primary }}
+            />
+          </View>
+        </View>
+
         {/* Daily Reminder */}
         <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>DAILY REMINDER</Text>
         <View
@@ -398,6 +467,79 @@ export default function SettingsScreen() {
               <Text style={{ color: colors.text, fontWeight: '800' }}>Import JSON</Text>
             </Pressable>
           </View>
+        </View>
+
+        {/* Local Auto-Snapshots */}
+        <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
+          LOCAL DATABASE SNAPSHOTS
+        </Text>
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: colors.surface, borderColor: colors.border },
+          ]}>
+          <Text style={[styles.cardSub, { color: colors.textSecondary, marginBottom: 12 }]}>
+            Rolling offline snapshots saved directly inside local device SQLite storage.
+          </Text>
+
+          <Pressable
+            onPress={handleCreateSnapshot}
+            style={[styles.secondaryBtn, { borderColor: colors.primary, marginTop: 0, marginBottom: 12 }]}>
+            <Ionicons name="shield-checkmark-outline" size={17} color={colors.primary} />
+            <Text style={{ color: colors.primary, fontWeight: '800' }}>Create Local Snapshot Now</Text>
+          </Pressable>
+
+          {snapshots.length > 0 ? (
+            <View style={{ gap: 8 }}>
+              {snapshots.map((snap) => {
+                const dateStr = new Date(snap.createdAt).toLocaleString(undefined, {
+                  month: 'short',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                });
+                return (
+                  <View
+                    key={snap.id}
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: 10,
+                      borderRadius: 10,
+                      backgroundColor: colors.surfaceMuted,
+                    }}>
+                    <View>
+                      <Text style={{ fontSize: 13, fontWeight: '700', color: colors.text }}>
+                        {dateStr}
+                      </Text>
+                      <Text style={{ fontSize: 11, color: colors.textSecondary }}>
+                        {snap.versesCount} verses backed up
+                      </Text>
+                    </View>
+                    <Pressable
+                      onPress={() => handleRestoreSnapshot(snap.id)}
+                      style={{
+                        paddingHorizontal: 12,
+                        paddingVertical: 6,
+                        borderRadius: 8,
+                        backgroundColor: colors.surface,
+                        borderWidth: 1,
+                        borderColor: colors.border,
+                      }}>
+                      <Text style={{ fontSize: 12, fontWeight: '700', color: colors.primary }}>
+                        Restore
+                      </Text>
+                    </Pressable>
+                  </View>
+                );
+              })}
+            </View>
+          ) : (
+            <Text style={{ fontSize: 12, color: colors.textMuted, fontStyle: 'italic', textAlign: 'center' }}>
+              No snapshots created yet. Tap above to create your first safety point.
+            </Text>
+          )}
         </View>
 
         <Text style={[styles.footerNote, { color: colors.textMuted }]}>

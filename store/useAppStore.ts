@@ -8,16 +8,20 @@ import {
   DEFAULT_SETTINGS,
   dbDeleteDeck,
   dbDeleteVerse,
+  dbGetAutoSnapshots,
   dbInsertBadges,
   dbInsertDeck,
   dbInsertQuizSession,
   dbInsertReviewLog,
+  dbRestoreAutoSnapshot,
   dbRestoreBackup,
+  dbSaveAutoSnapshot,
   dbSaveSettings,
   dbUpsertDailyActivity,
   dbUpsertVerse,
   initializeAndLoadSnapshot,
   persistSnapshotDelta,
+  type AutoSnapshotMeta,
 } from '@/lib/db';
 import { syncDailyReminderAsync } from '@/lib/notifications';
 import { computeSM2 } from '@/lib/sm2';
@@ -84,9 +88,14 @@ interface AppState {
   }) => Promise<void>;
 
   updateSettings: (partial: Partial<AppSettings>) => Promise<{ reminderError?: string }>;
+  updateVerseNotes: (verseId: string, notes: string) => Promise<void>;
+  updateVerseTags: (verseId: string, tags: string[]) => Promise<void>;
   markSharedCard: () => Promise<void>;
   exportBackup: () => Promise<void>;
   importBackup: () => Promise<boolean>;
+  createLocalSnapshot: () => Promise<void>;
+  getAutoSnapshots: () => Promise<AutoSnapshotMeta[]>;
+  restoreLocalSnapshot: (id: string) => Promise<boolean>;
 }
 
 const emptyStreak = calculateStreak([]);
@@ -448,6 +457,67 @@ export const useAppStore = create<AppState>((set, get) => {
         dailyActivity: payload.dailyActivity,
         badges: payload.badges,
         settings: { ...DEFAULT_SETTINGS, ...payload.settings },
+        streak,
+        priorityQueueIds: [],
+      });
+      await evaluateBadgesAndStreak();
+      return true;
+    },
+
+    updateVerseNotes: async (verseId: string, notes: string) => {
+      const v = get().verses.find((item) => item.id === verseId);
+      if (!v) return;
+      const updated = { ...v, notes };
+      set({
+        verses: get().verses.map((item) => (item.id === verseId ? updated : item)),
+      });
+      await dbUpsertVerse(updated);
+      syncWeb();
+    },
+
+    updateVerseTags: async (verseId: string, tags: string[]) => {
+      const v = get().verses.find((item) => item.id === verseId);
+      if (!v) return;
+      const updated = { ...v, tags };
+      set({
+        verses: get().verses.map((item) => (item.id === verseId ? updated : item)),
+      });
+      await dbUpsertVerse(updated);
+      syncWeb();
+    },
+
+    createLocalSnapshot: async () => {
+      const s = get();
+      const payload: BackupPayload = {
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        decks: s.decks,
+        verses: s.verses,
+        reviewLogs: s.reviewLogs,
+        quizSessions: s.quizSessions,
+        dailyActivity: s.dailyActivity,
+        badges: s.badges,
+        settings: s.settings,
+      };
+      await dbSaveAutoSnapshot(payload);
+    },
+
+    getAutoSnapshots: async () => {
+      return await dbGetAutoSnapshots();
+    },
+
+    restoreLocalSnapshot: async (id: string) => {
+      const restored = await dbRestoreAutoSnapshot(id);
+      if (!restored) return false;
+      const streak = calculateStreak(restored.dailyActivity);
+      set({
+        decks: restored.decks,
+        verses: restored.verses,
+        reviewLogs: restored.reviewLogs,
+        quizSessions: restored.quizSessions,
+        dailyActivity: restored.dailyActivity,
+        badges: restored.badges,
+        settings: { ...DEFAULT_SETTINGS, ...restored.settings },
         streak,
         priorityQueueIds: [],
       });
