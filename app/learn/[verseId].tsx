@@ -90,10 +90,23 @@ export default function LearnVerseScreen() {
   const [filledWords, setFilledWords] = useState<Record<number, string>>({});
   const [wrongShake, setWrongShake] = useState(false);
 
-  // Scripture Typer state
+  // Scripture Typer state (Full-Word Typing Recall)
   const [typeIndex, setTypeIndex] = useState(0);
+  const [currentTypedWord, setCurrentTypedWord] = useState('');
+  const [typedError, setTypedError] = useState<string | null>(null);
+  const [peekWord, setPeekWord] = useState(false);
+  const [peeksCount, setPeeksCount] = useState(0);
   const [typeShake, setTypeShake] = useState(false);
   const typeInputRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (stage === 'type' && typeIndex < tokens.length) {
+      const timer = setTimeout(() => {
+        typeInputRef.current?.focus();
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [stage, typeIndex, tokens.length]);
 
   // Word Scramble state
   const [scramblePlacedIndices, setScramblePlacedIndices] = useState<number[]>([]);
@@ -240,24 +253,71 @@ export default function LearnVerseScreen() {
     }
   };
 
-  // Scripture Typer: checks keystroke on first letter of current word
-  const handleTypeKeystroke = (char: string) => {
+  // Scripture Typer: Full-Word Recall Validation
+  const cleanWordForComparison = (w: string): string => {
+    return w
+      .trim()
+      .toLowerCase()
+      .replace(/[’']/g, "'")
+      .replace(/[^a-z0-9'-]/g, '');
+  };
+
+  const validateAndSubmitWord = (attempt: string) => {
     if (typeIndex >= tokens.length) return;
     const targetToken = tokens[typeIndex];
-    const firstChar = targetToken.clean[0]?.toLowerCase();
+    if (!targetToken) return;
 
-    if (char.toLowerCase() === firstChar) {
+    const cleanAttempt = cleanWordForComparison(attempt);
+    const cleanTarget = cleanWordForComparison(targetToken.clean);
+
+    if (cleanAttempt === cleanTarget) {
       hapticLight();
       const nextIdx = typeIndex + 1;
       setTypeIndex(nextIdx);
+      setCurrentTypedWord('');
+      setTypedError(null);
+      setPeekWord(false);
       if (nextIdx >= tokens.length) {
         hapticSuccess();
       }
     } else {
       hapticError();
       setTypeShake(true);
-      setTimeout(() => setTypeShake(false), 400);
+      setTypedError(`"${attempt}" does not match. Try again or tap Peek.`);
+      setTimeout(() => setTypeShake(false), 450);
     }
+  };
+
+  const handleTypeChange = (text: string) => {
+    if (typeIndex >= tokens.length) return;
+    const targetToken = tokens[typeIndex];
+    if (!targetToken) return;
+
+    // If user hit spacebar, submit the word typed so far
+    if (text.endsWith(' ')) {
+      const wordAttempt = text.trim();
+      if (wordAttempt.length > 0) {
+        validateAndSubmitWord(wordAttempt);
+      }
+      return;
+    }
+
+    setCurrentTypedWord(text);
+    if (typedError) setTypedError(null);
+  };
+
+  const handleSubmitTypedWord = () => {
+    if (!currentTypedWord.trim()) return;
+    validateAndSubmitWord(currentTypedWord.trim());
+  };
+
+  const handleResetTyper = () => {
+    hapticLight();
+    setTypeIndex(0);
+    setCurrentTypedWord('');
+    setTypedError(null);
+    setPeekWord(false);
+    setPeeksCount(0);
   };
 
   // Scramble word tap handler
@@ -305,7 +365,7 @@ export default function LearnVerseScreen() {
 
   const STAGE_ORDER: { key: Stage; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
     { key: 'read', label: '1. Read & Listen', icon: 'book-outline' },
-    { key: 'type', label: '2. Scripture Typer', icon: 'keypad-outline' },
+    { key: 'type', label: '2. Word Typer', icon: 'keypad-outline' },
     { key: 'scramble', label: '3. Scramble', icon: 'grid-outline' },
     { key: 'fill', label: '4. Fill Blanks', icon: 'create-outline' },
     { key: 'first_letter', label: '5. First Letters', icon: 'text-outline' },
@@ -578,14 +638,14 @@ export default function LearnVerseScreen() {
               }}
               style={[styles.nextStageBtn, { backgroundColor: colors.primary }]}>
               <Text style={{ color: colors.primaryText, fontWeight: '800', fontSize: 16 }}>
-                Next: Scripture Typer Mode
+                Next: Full-Word Typer
               </Text>
               <Ionicons name="arrow-forward" size={18} color={colors.primaryText} />
             </Pressable>
           </Animated.View>
         )}
 
-        {/* STAGE 2: SCRIPTURE TYPER (Active First-Letter Recall) */}
+        {/* STAGE 2: SCRIPTURE TYPER (Full-Word Typing Recall) */}
         {stage === 'type' && (
           <Animated.View entering={FadeIn.duration(200)} style={styles.stageBody}>
             <View
@@ -596,7 +656,7 @@ export default function LearnVerseScreen() {
               {/* Progress Tracker */}
               <View style={styles.typerHeader}>
                 <Text style={[styles.typerHeaderLabel, { color: colors.textSecondary }]}>
-                  Type the first letter of each word:
+                  Type each word from memory:
                 </Text>
                 <Text style={[styles.typerCounter, { color: colors.primary }]}>
                   {typeIndex} / {tokens.length} words
@@ -616,7 +676,9 @@ export default function LearnVerseScreen() {
               </View>
 
               {/* Interactive Verse Layout */}
-              <View style={styles.typerWordBox}>
+              <Pressable
+                onPress={() => typeInputRef.current?.focus()}
+                style={styles.typerWordBox}>
                 {tokens.map((t, idx) => {
                   const isDone = idx < typeIndex;
                   const isCurrent = idx === typeIndex;
@@ -625,6 +687,11 @@ export default function LearnVerseScreen() {
                       key={t.index}
                       style={[
                         styles.typerWordChip,
+                        isDone && {
+                          backgroundColor: `${colors.success}18`,
+                          borderColor: `${colors.success}40`,
+                          borderWidth: 1,
+                        },
                         isCurrent && {
                           backgroundColor: typeShake ? colors.dangerSoft : colors.primarySoft,
                           borderColor: typeShake ? colors.danger : colors.primary,
@@ -643,57 +710,148 @@ export default function LearnVerseScreen() {
                             fontWeight: isDone || isCurrent ? '700' : '400',
                           },
                         ]}>
-                        {isDone ? t.raw : isCurrent ? t.clean[0] + '•••' : '••••'}
+                        {isDone
+                          ? t.raw
+                          : isCurrent
+                          ? peekWord
+                            ? t.raw
+                            : `[ ${'_ '.repeat(Math.max(2, Math.min(6, t.clean.length)))}]`
+                          : '••••'}
                       </Text>
                     </View>
                   );
                 })}
-              </View>
+              </Pressable>
 
-              {/* Hidden Keystroke Receiver */}
-              <TextInput
-                ref={typeInputRef}
-                style={styles.hiddenInput}
-                autoFocus
-                autoCapitalize="none"
-                autoCorrect={false}
-                value=""
-                onChangeText={(text) => {
-                  if (text.length > 0) {
-                    const char = text.slice(-1);
-                    handleTypeKeystroke(char);
-                  }
-                }}
-              />
+              {/* Full-Word Typing Input Box */}
+              {typeIndex < tokens.length ? (
+                <View style={{ marginTop: 14 }}>
+                  <View
+                    style={[
+                      styles.typingInputContainer,
+                      {
+                        backgroundColor: colors.surfaceMuted,
+                        borderColor: typeShake
+                          ? colors.danger
+                          : cleanWordForComparison(currentTypedWord) ===
+                            cleanWordForComparison(tokens[typeIndex]?.clean ?? '')
+                          ? colors.success
+                          : colors.border,
+                      },
+                    ]}>
+                    <Ionicons
+                      name="pencil-outline"
+                      size={18}
+                      color={colors.primary}
+                      style={{ marginLeft: 12, marginRight: 8 }}
+                    />
+                    <TextInput
+                      ref={typeInputRef}
+                      style={[styles.typingInputField, { color: colors.text }]}
+                      placeholder={`Word #${typeIndex + 1} (${tokens[typeIndex]?.clean.length ?? 0} letters)...`}
+                      placeholderTextColor={colors.textMuted}
+                      value={currentTypedWord}
+                      onChangeText={handleTypeChange}
+                      onSubmitEditing={handleSubmitTypedWord}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      returnKeyType={typeIndex + 1 >= tokens.length ? 'done' : 'next'}
+                    />
+                    {currentTypedWord.trim().length > 0 && (
+                      <Pressable
+                        onPress={handleSubmitTypedWord}
+                        hitSlop={8}
+                        style={[
+                          styles.typingSubmitBtn,
+                          {
+                            backgroundColor:
+                              cleanWordForComparison(currentTypedWord) ===
+                              cleanWordForComparison(tokens[typeIndex]?.clean ?? '')
+                                ? colors.success
+                                : colors.primary,
+                          },
+                        ]}>
+                        <Ionicons
+                          name={
+                            cleanWordForComparison(currentTypedWord) ===
+                            cleanWordForComparison(tokens[typeIndex]?.clean ?? '')
+                              ? 'checkmark'
+                              : 'arrow-forward'
+                          }
+                          size={16}
+                          color="#FFF"
+                        />
+                      </Pressable>
+                    )}
+                  </View>
 
-              {typeIndex >= tokens.length ? (
-                <View style={[styles.congratsBox, { backgroundColor: colors.successSoft }]}>
-                  <Ionicons name="checkmark-circle" size={28} color={colors.success} />
-                  <Text style={[styles.congratsText, { color: colors.success }]}>
-                    Verse Completed! 100% typed from memory.
-                  </Text>
+                  {/* Feedback Message */}
+                  {typedError ? (
+                    <View style={styles.typingFeedbackRow}>
+                      <Ionicons name="alert-circle" size={14} color={colors.danger} />
+                      <Text style={[styles.typingErrorText, { color: colors.danger }]}>
+                        {typedError}
+                      </Text>
+                    </View>
+                  ) : (
+                    <Text style={[styles.typingHintText, { color: colors.textSecondary }]}>
+                      Type word and press <Text style={{ fontWeight: '700' }}>Space</Text> or{' '}
+                      <Text style={{ fontWeight: '700' }}>Enter</Text> to advance.
+                    </Text>
+                  )}
+
+                  {/* Peek & Hint Actions */}
+                  <View style={styles.typingActionRow}>
+                    <Pressable
+                      onPress={() => {
+                        hapticLight();
+                        setPeeksCount((c) => c + 1);
+                        setPeekWord(true);
+                        setTimeout(() => setPeekWord(false), 2500);
+                      }}
+                      style={[
+                        styles.peekBtn,
+                        { backgroundColor: colors.surfaceMuted, borderColor: colors.border },
+                      ]}>
+                      <Ionicons name="eye-outline" size={15} color={colors.primary} />
+                      <Text style={[styles.peekBtnText, { color: colors.primary }]}>
+                        {peekWord ? 'Revealed Above' : 'Peek Current Word'}
+                      </Text>
+                    </Pressable>
+
+                    {peeksCount > 0 && (
+                      <Text style={[styles.peeksBadge, { color: colors.textMuted }]}>
+                        {peeksCount} {peeksCount === 1 ? 'peek' : 'peeks'} used
+                      </Text>
+                    )}
+                  </View>
                 </View>
               ) : (
-                <Pressable
-                  onPress={() => typeInputRef.current?.focus()}
-                  style={[styles.tapToTypeBtn, { backgroundColor: colors.surfaceMuted }]}>
-                  <Ionicons name="keypad" size={18} color={colors.primary} />
-                  <Text style={[styles.tapToTypeBtnText, { color: colors.primary }]}>
-                    Tap to type with your keyboard (Next letter: &quot;{tokens[typeIndex]?.clean[0]?.toUpperCase()}&quot;)
-                  </Text>
-                </Pressable>
+                <View
+                  style={[
+                    styles.congratsBox,
+                    { backgroundColor: colors.successSoft, marginTop: 16 },
+                  ]}>
+                  <Ionicons name="checkmark-circle" size={32} color={colors.success} />
+                  <View style={{ flex: 1 }}>
+                    <Text style={[styles.congratsTitle, { color: colors.success }]}>
+                      Verse Mastered!
+                    </Text>
+                    <Text style={[styles.congratsSub, { color: colors.textSecondary }]}>
+                      You typed all {tokens.length} words word-for-word from memory
+                      {peeksCount === 0 ? ' with zero peeks!' : ` with ${peeksCount} peeks.`}
+                    </Text>
+                  </View>
+                </View>
               )}
             </View>
 
-            <View style={{ flexDirection: 'row', gap: 10 }}>
+            <View style={{ flexDirection: 'row', gap: 10, marginTop: 12 }}>
               <Pressable
-                onPress={() => {
-                  hapticLight();
-                  setTypeIndex(0);
-                }}
+                onPress={handleResetTyper}
                 style={[styles.secondaryBtn, { flex: 1, backgroundColor: colors.surfaceMuted }]}>
                 <Ionicons name="refresh" size={16} color={colors.text} />
-                <Text style={[styles.secondaryBtnText, { color: colors.text }]}>Reset</Text>
+                <Text style={[styles.secondaryBtnText, { color: colors.text }]}>Start Over</Text>
               </Pressable>
 
               <Pressable
@@ -1328,31 +1486,89 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  typerHeaderLabel: { fontSize: 12.5, fontWeight: '600' },
+  typerHeaderLabel: { fontSize: 13, fontWeight: '700' },
   typerCounter: { fontSize: 13, fontWeight: '700' },
   progressBarTrack: { height: 6, borderRadius: 3, overflow: 'hidden' },
   progressBarFill: { height: '100%', borderRadius: 3 },
-  typerWordBox: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingVertical: 6 },
-  typerWordChip: { paddingHorizontal: 7, paddingVertical: 4, borderRadius: 8 },
+  typerWordBox: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingVertical: 8 },
+  typerWordChip: { paddingHorizontal: 8, paddingVertical: 5, borderRadius: 8 },
   typerWordText: { fontSize: 15 },
-  hiddenInput: { width: 1, height: 1, opacity: 0.01, position: 'absolute' },
+  typingInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 14,
+    borderWidth: 1.5,
+    minHeight: 48,
+    paddingRight: 6,
+  },
+  typingInputField: {
+    flex: 1,
+    fontSize: 15.5,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+  },
+  typingSubmitBtn: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  typingFeedbackRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 6,
+    paddingHorizontal: 4,
+  },
+  typingErrorText: {
+    fontSize: 12.5,
+    fontWeight: '600',
+  },
+  typingHintText: {
+    fontSize: 12,
+    marginTop: 6,
+    paddingHorizontal: 4,
+  },
+  typingActionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 12,
+  },
+  peekBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  peekBtnText: {
+    fontSize: 12.5,
+    fontWeight: '700',
+  },
+  peeksBadge: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
   congratsBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
-    padding: 14,
-    borderRadius: 12,
+    gap: 12,
+    padding: 16,
+    borderRadius: 14,
   },
-  congratsText: { fontSize: 14, fontWeight: '700', flex: 1 },
-  tapToTypeBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-    paddingVertical: 12,
-    borderRadius: 12,
+  congratsTitle: {
+    fontSize: 16,
+    fontWeight: '800',
   },
-  tapToTypeBtnText: { fontSize: 13, fontWeight: '700' },
+  congratsSub: {
+    fontSize: 13,
+    marginTop: 2,
+    lineHeight: 18,
+  },
 
   // Scramble Mode Styles
   scrambleSentenceBox: {
