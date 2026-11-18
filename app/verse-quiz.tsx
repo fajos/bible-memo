@@ -1,14 +1,28 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { useAppTheme } from '@/hooks/useAppTheme';
 import { hapticError, hapticLight, hapticSuccess } from '@/lib/haptics';
-import { generateVerseQuiz } from '@/lib/verseQuiz';
+import { generateVerseQuiz, type VerseQuizQuestion } from '@/lib/verseQuiz';
 import { useAppStore } from '@/store/useAppStore';
 import type { VerseQuizMode } from '@/types/models';
+
+function buildQuizQuestions(deckId: string, mode: VerseQuizMode): VerseQuizQuestion[] {
+  const allVerses = useAppStore.getState().verses;
+  const translation = useAppStore.getState().settings.translation;
+  const deckVerses = deckId === 'all' ? allVerses : allVerses.filter((v) => v.deckId === deckId);
+  const distractorPool = deckVerses.length >= 4 ? deckVerses : allVerses;
+  return generateVerseQuiz({
+    targetVerses: deckVerses,
+    distractorPoolVerses: distractorPool,
+    translation,
+    mode,
+    maxQuestions: 8,
+  });
+}
 
 export default function VerseQuizScreen() {
   const params = useLocalSearchParams<{ deckId?: string; mode?: string }>();
@@ -16,9 +30,7 @@ export default function VerseQuizScreen() {
   const mode = (params.mode ?? 'mixed') as VerseQuizMode;
 
   const { colors, verseTypography } = useAppTheme();
-  const verses = useAppStore((s) => s.verses);
   const decks = useAppStore((s) => s.decks);
-  const translation = useAppStore((s) => s.settings.translation);
   const flagQuizMiss = useAppStore((s) => s.flagQuizMiss);
   const recordVerseReview = useAppStore((s) => s.recordVerseReview);
   const recordQuizSession = useAppStore((s) => s.recordQuizSession);
@@ -26,20 +38,10 @@ export default function VerseQuizScreen() {
   const deckName =
     deckId === 'all' ? 'All Decks' : decks.find((d) => d.id === deckId)?.name ?? 'Deck';
 
-  const [sessionKey, setSessionKey] = useState(0);
-
-  const questions = useMemo(() => {
-    const deckVerses = deckId === 'all' ? verses : verses.filter((v) => v.deckId === deckId);
-    const distractorPool = deckVerses.length >= 4 ? deckVerses : verses;
-    return generateVerseQuiz({
-      targetVerses: deckVerses,
-      distractorPoolVerses: distractorPool,
-      translation,
-      mode,
-      maxQuestions: 8,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deckId, verses, translation, mode, sessionKey]);
+  // Questions are generated ONCE per session and kept completely stable during the quiz
+  const [questions, setQuestions] = useState<VerseQuizQuestion[]>(() =>
+    buildQuizQuestions(deckId, mode)
+  );
 
   const [startedAt, setStartedAt] = useState(() => Date.now());
   const [idx, setIdx] = useState(0);
@@ -52,8 +54,8 @@ export default function VerseQuizScreen() {
   const [pickedChunks, setPickedChunks] = useState<{ id: string; text: string }[]>([]);
   const [finished, setFinished] = useState(false);
 
-  const handlePlayAgain = () => {
-    setSessionKey((k) => k + 1);
+  const handlePlayAgain = useCallback(() => {
+    setQuestions(buildQuizQuestions(deckId, mode));
     setStartedAt(Date.now());
     setIdx(0);
     setScore(0);
@@ -62,7 +64,16 @@ export default function VerseQuizScreen() {
     setSelectedOpt(null);
     setPickedChunks([]);
     setFinished(false);
-  };
+  }, [deckId, mode]);
+
+  const lastParamsRef = useRef(`${deckId}_${mode}`);
+  useEffect(() => {
+    const key = `${deckId}_${mode}`;
+    if (lastParamsRef.current !== key) {
+      lastParamsRef.current = key;
+      handlePlayAgain();
+    }
+  }, [deckId, mode, handlePlayAgain]);
 
   const current = questions[idx];
 
@@ -232,17 +243,26 @@ export default function VerseQuizScreen() {
                     lineHeight: verseTypography.lineHeight,
                   },
                 ]}>
-                {current.promptSegments.map((seg, i) => (
-                  <Text
-                    key={i}
-                    style={
-                      seg.isBlank
-                        ? { color: colors.primary, fontWeight: '800' }
-                        : undefined
-                    }>
-                    {seg.text}
-                  </Text>
-                ))}
+                {current.promptSegments.map((seg, i) => {
+                  if (!seg.isBlank) {
+                    return <Text key={i}>{seg.text}</Text>;
+                  }
+                  return (
+                    <Text
+                      key={i}
+                      style={{
+                        color:
+                          answered === null
+                            ? colors.primary
+                            : answered
+                            ? colors.success
+                            : colors.danger,
+                        fontWeight: '800',
+                      }}>
+                      {answered !== null ? ` ${current.correctAnswer} ` : seg.text}
+                    </Text>
+                  );
+                })}
               </Text>
             </View>
 
@@ -264,6 +284,7 @@ export default function VerseQuizScreen() {
                 return (
                   <Pressable
                     key={opt}
+                    disabled={answered !== null}
                     onPress={() => handlePickMultipleChoice(opt)}
                     style={[styles.optBtn, { backgroundColor: bg, borderColor: border }]}>
                     <Text style={[styles.optText, { color: colors.text }]}>{opt}</Text>
@@ -315,6 +336,7 @@ export default function VerseQuizScreen() {
                 return (
                   <Pressable
                     key={optIdx}
+                    disabled={answered !== null}
                     onPress={() => handlePickMultipleChoice(optIdx)}
                     style={[styles.optBtn, { backgroundColor: bg, borderColor: border }]}>
                     <Text style={[styles.optText, { color: colors.text }]}>... {opt}</Text>
@@ -364,7 +386,8 @@ export default function VerseQuizScreen() {
                 }
                 return (
                   <Pressable
-                    key={opt}
+                    key={optIdx}
+                    disabled={answered !== null}
                     onPress={() => handlePickMultipleChoice(optIdx)}
                     style={[styles.optBtn, { backgroundColor: bg, borderColor: border }]}>
                     <Text style={[styles.optText, { color: colors.text }]}>{opt}</Text>

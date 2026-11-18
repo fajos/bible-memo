@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
@@ -36,6 +36,25 @@ function getDailyChallengeQuestions(dateKey: string): TriviaQuestion[] {
   return pool.slice(0, 5);
 }
 
+function buildTriviaQuestions(
+  mode: 'daily' | 'timed' | 'category',
+  category: string,
+  difficulty: string
+): TriviaQuestion[] {
+  if (mode === 'daily') {
+    return getDailyChallengeQuestions(toLocalDateKey());
+  }
+  let filtered = TRIVIA_BANK;
+  if (mode === 'category') {
+    filtered = filtered.filter((q) => q.category === category);
+  }
+  if (difficulty !== 'all') {
+    filtered = filtered.filter((q) => q.difficulty === difficulty);
+  }
+  const shuffled = shuffle(filtered);
+  return mode === 'timed' ? shuffled.slice(0, 25) : shuffled.slice(0, 10);
+}
+
 export default function TriviaScreen() {
   const params = useLocalSearchParams<{
     mode?: string;
@@ -50,23 +69,10 @@ export default function TriviaScreen() {
   const { colors } = useAppTheme();
   const recordQuizSession = useAppStore((s) => s.recordQuizSession);
 
-  const [sessionKey, setSessionKey] = useState(0);
-
-  const questions = useMemo(() => {
-    if (mode === 'daily') {
-      return getDailyChallengeQuestions(toLocalDateKey());
-    }
-    let filtered = TRIVIA_BANK;
-    if (mode === 'category') {
-      filtered = filtered.filter((q) => q.category === category);
-    }
-    if (difficulty !== 'all') {
-      filtered = filtered.filter((q) => q.difficulty === difficulty);
-    }
-    const shuffled = shuffle(filtered);
-    return mode === 'timed' ? shuffled.slice(0, 25) : shuffled.slice(0, 10);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode, category, difficulty, sessionKey]);
+  // Keep questions completely stable during the session
+  const [questions, setQuestions] = useState<TriviaQuestion[]>(() =>
+    buildTriviaQuestions(mode, category, difficulty)
+  );
 
   const [startedAt, setStartedAt] = useState(() => Date.now());
   const [idx, setIdx] = useState(0);
@@ -77,7 +83,7 @@ export default function TriviaScreen() {
   const [finished, setFinished] = useState(false);
 
   const handlePlayAgain = () => {
-    setSessionKey((k) => k + 1);
+    setQuestions(buildTriviaQuestions(mode, category, difficulty));
     setStartedAt(Date.now());
     setIdx(0);
     setScore(0);
