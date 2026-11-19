@@ -18,11 +18,7 @@ import { formatTimeLabel } from '@/lib/date';
 import type { AutoSnapshotMeta } from '@/lib/db';
 import { hapticSelection, hapticSuccess } from '@/lib/haptics';
 import { sendTestReminderAsync } from '@/lib/notifications';
-import {
-  applyUpdateAsync,
-  checkAndFetchUpdateAsync,
-  getUpdateStatus,
-} from '@/lib/updates';
+import { applyUpdateAsync, checkAndFetchUpdateAsync } from '@/lib/updates';
 import { useAppStore } from '@/store/useAppStore';
 import type { FontSizeOption, ThemePreference, Translation } from '@/types/models';
 
@@ -42,7 +38,6 @@ export default function SettingsScreen() {
   const [checkingUpdate, setCheckingUpdate] = useState(false);
   const [updateReady, setUpdateReady] = useState(false);
   const [snapshots, setSnapshots] = useState<AutoSnapshotMeta[]>([]);
-  const updateInfo = getUpdateStatus();
 
   React.useEffect(() => {
     void getAutoSnapshots().then(setSnapshots);
@@ -380,34 +375,10 @@ export default function SettingsScreen() {
             styles.card,
             { backgroundColor: colors.surface, borderColor: colors.border },
           ]}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <View style={{ flex: 1, marginRight: 8 }}>
-              <Text style={[styles.cardTitle, { color: colors.text }]}>EAS Update Status</Text>
-              <Text style={[styles.cardSub, { color: colors.textSecondary }]}>
-                {updateInfo.isEnabled
-                  ? `Channel: ${updateInfo.channel ?? 'production'} • v${updateInfo.runtimeVersion ?? '1.0.0'}`
-                  : updateInfo.isEmbeddedLaunch
-                  ? 'Running local build (OTA updates disabled in dev)'
-                  : 'Web / Development mode'}
-              </Text>
-            </View>
-            <View
-              style={{
-                paddingHorizontal: 8,
-                paddingVertical: 4,
-                borderRadius: 8,
-                backgroundColor: updateInfo.isEnabled ? colors.primarySoft : colors.surfaceMuted,
-              }}>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontWeight: '700',
-                  color: updateInfo.isEnabled ? colors.primary : colors.textMuted,
-                }}>
-                {updateInfo.isEnabled ? 'OTA Active' : 'Dev / Web'}
-              </Text>
-            </View>
-          </View>
+          <Text style={[styles.cardTitle, { color: colors.text }]}>Check for Updates</Text>
+          <Text style={[styles.cardSub, { color: colors.textSecondary }]}>
+            Download the latest improvements, fixes, and scripture features instantly.
+          </Text>
 
           {updateReady ? (
             <Pressable
