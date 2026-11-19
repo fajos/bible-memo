@@ -151,8 +151,12 @@ npx eas update --channel preview --message "Test new feature"
 
 ---
 
-## 📜 Privacy & Terms
+## 📜 Privacy & Terms (App Store & Google Play URLs)
 
-- **[Privacy Policy](PRIVACY_POLICY.md)**: 100% offline-first, zero data collection, no account required, no third-party trackers.
-- **[Terms of Use](TERMS_OF_USE.md)**: Public domain scriptures (KJV & WEB), free & open terms.
+- **Privacy Policy**: [PRIVACY_POLICY.md](PRIVACY_POLICY.md)
+  - HTML Version: [docs/privacy.html](docs/privacy.html) / `https://fajos.github.io/bible-memo/privacy.html`
+- **Terms of Use**: [TERMS_OF_USE.md](TERMS_OF_USE.md)
+  - HTML Version: [docs/terms.html](docs/terms.html) / `https://fajos.github.io/bible-memo/terms.html`
+- **Landing Hub**: [docs/index.html](docs/index.html) / `https://fajos.github.io/bible-memo/`
+
 

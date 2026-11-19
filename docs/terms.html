@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Use - Selah Scripture Memory</title>
+  <meta name="description" content="Terms of Use for Selah Scripture Memory. Public domain Bible translations, open-source software, and user responsibilities.">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --badge-bg: #f1f5f9;
+      --badge-text: #475569;
+      --badge-border: #cbd5e1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #60a5fa;
+        --primary-soft: #1e293b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --bg: #090d16;
+        --card-bg: #111827;
+        --border: #1f293d;
+        --badge-bg: #1e293b;
+        --badge-text: #cbd5e1;
+        --badge-border: #334155;
+      }
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 0;
+    }
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+    }
+    main {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 24px 80px;
+    }
+    .hero {
+      margin-bottom: 32px;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      background-color: var(--badge-bg);
+      color: var(--badge-text);
+      border: 1px solid var(--badge-border);
+    }
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+    .meta-date {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+    .lead {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-main);
+      margin-bottom: 32px;
+      padding: 20px;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    p {
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+    ul {
+      margin: 12px 0 16px 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    strong {
+      color: var(--text-main);
+    }
+    .disclaimer-box {
+      font-size: 0.9rem;
+      font-style: italic;
+      line-height: 1.6;
+      background-color: var(--primary-soft);
+      padding: 16px;
+      border-radius: 12px;
+      color: var(--text-muted);
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background-color: var(--card-bg);
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span>📖 Selah Scripture Memory</span>
+      </a>
+      <nav class="nav-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html" class="active">Terms of Use</a>
+        <a href="https://github.com/fajos/bible-memo" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="badge-row">
+        <span class="badge">📖 Public Domain Scriptures</span>
+        <span class="badge">🎁 Free &amp; Open Source</span>
+        <span class="badge">📱 Offline Utility</span>
+      </div>
+      <h1>Terms of Use</h1>
+      <p class="meta-date"><strong>Last Updated &amp; Effective:</strong> November 19, 2026</p>
+      <div class="lead">
+        Please read these Terms of Use carefully before using <strong>Selah Scripture Memory</strong>. By downloading, accessing, or using the Application, you agree to be bound by these terms.
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="card">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By downloading, installing, accessing, or using Selah Scripture Memory, you agree to be bound by these Terms of Use. If you do not agree with any part of these Terms, please do not use the Application.</p>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="card">
+      <h2>2. Description of the Application</h2>
+      <p>Selah Scripture Memory is an educational and spiritual utility intended to help users read, meditate upon, and memorize the Holy Scriptures. Features include:</p>
+      <ul>
+        <li>Spaced Repetition System (SuperMemo SM-2) review scheduling.</li>
+        <li>Interactive study modes (Scripture Typer, Word Scramble, Fill-in-the-Blank, First Letter Prompts, and Selah Meditation).</li>
+        <li>Bible quizzes and trivia challenges.</li>
+        <li>Local database backups and snapshots.</li>
+      </ul>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="card">
+      <h2>3. Public Domain Bible Translations</h2>
+      <p>The Bible translations distributed within the Application are strictly in the <strong>public domain</strong>:</p>
+      <ul>
+        <li><strong>King James Version (KJV):</strong> Public domain worldwide.</li>
+        <li><strong>World English Bible (WEB):</strong> Dedicated to the public domain by Rainbow Missions, Inc.</li>
+      </ul>
+      <p>You are free to read, memorize, quote, share, and distribute these scripture texts without copyright restrictions or royalty obligations.</p>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="card">
+      <h2>4. Software License &amp; Open Source</h2>
+      <p>The source code and design of Selah Scripture Memory are made available as open source under the terms of the project's license on GitHub:</p>
+      <p><a href="https://github.com/fajos/bible-memo" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 700;">https://github.com/fajos/bible-memo</a></p>
+      <p>You may inspect, fork, and contribute to the source code subject to the repository terms.</p>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="card">
+      <h2>5. User Responsibilities &amp; Data Backups</h2>
+      <ul>
+        <li><strong>Local Storage:</strong> Selah Scripture Memory stores all user data (including study history, custom decks, personal notes, tags, and streaks) locally on your device without transmitting it to any cloud server.</li>
+        <li><strong>Backup Responsibility:</strong> Because no remote accounts or cloud sync exist, <strong>you are solely responsible for maintaining backups of your study data</strong>. We strongly recommend using the built-in <strong>Export JSON</strong> feature in Settings or taking local database snapshots.</li>
+        <li><strong>Data Loss:</strong> We are not liable for any loss of user data resulting from hardware failure, operating system updates, device reset, or application uninstallation.</li>
+      </ul>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="card">
+      <h2>6. Acceptable Use</h2>
+      <p>You agree to use the Application in compliance with all applicable laws. You agree not to use the Application for any unlawful or malicious purpose, or attempt to disrupt the integrity of software updates.</p>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="card">
+      <h2>7. Disclaimer of Warranties</h2>
+      <div class="disclaimer-box">
+        THE APPLICATION IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, ACCURACY, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE APPLICATION WILL OPERATE ERROR-FREE OR THAT DEFECTS WILL BE IMMEDIATELY CORRECTED.
+      </div>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="card">
+      <h2>8. Limitation of Liability</h2>
+      <div class="disclaimer-box">
+        TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE DEVELOPERS, AUTHORS, CONTRIBUTORS, OR AFFILIATES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR IN CONNECTION WITH YOUR USE OR INABILITY TO USE THE APPLICATION.
+      </div>
+    </div>
+
+    <!-- Section 9 & 10 -->
+    <div class="card">
+      <h2>9. Contact &amp; Inquiries</h2>
+      <p>For questions, feature requests, or legal inquiries regarding these Terms of Use, please submit an issue on the project GitHub repository:</p>
+      <p><a href="https://github.com/fajos/bible-memo/issues" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 700;">https://github.com/fajos/bible-memo/issues</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>Selah Scripture Memory &bull; 100% Free &amp; Offline &bull; KJV &amp; WEB Public Domain</p>
+    <p style="margin-top: 8px;">
+      <a href="privacy.html">Privacy Policy</a> &bull;
+      <a href="terms.html">Terms of Use</a> &bull;
+      <a href="https://github.com/fajos/bible-memo" target="_blank" rel="noopener">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>

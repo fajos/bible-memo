@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selah Scripture Memory - Legal &amp; Policies</title>
+  <meta name="description" content="Legal and policy documentation for Selah Scripture Memory. 100% offline, privacy-first Bible memory app.">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #60a5fa;
+        --primary-soft: #1e293b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --bg: #090d16;
+        --card-bg: #111827;
+        --border: #1f293d;
+      }
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    main {
+      max-width: 860px;
+      margin: 60px auto 40px;
+      padding: 0 24px;
+      flex: 1;
+      width: 100%;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .app-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      border-color: var(--primary);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      background-color: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">📖 Selah Scripture Memory</a>
+      <nav class="nav-links">
+        <a href="https://github.com/fajos/bible-memo" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="app-icon">📖</div>
+      <h1>Selah Scripture Memory</h1>
+      <p class="subtitle">100% offline, privacy-first Bible memory and spiritual meditation.</p>
+    </div>
+
+    <div class="grid">
+      <a href="privacy.html" class="card">
+        <div>
+          <div class="card-icon">🛡️</div>
+          <h2>Privacy Policy</h2>
+          <p>Read our commitment to zero data collection, no account requirements, and complete on-device privacy.</p>
+        </div>
+        <span class="btn">Read Privacy Policy &rarr;</span>
+      </a>
+
+      <a href="terms.html" class="card">
+        <div>
+          <div class="card-icon">📜</div>
+          <h2>Terms of Use</h2>
+          <p>Review public domain scripture details (KJV &amp; WEB), open source software terms, and user responsibilities.</p>
+        </div>
+        <span class="btn">Read Terms of Use &rarr;</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Selah Scripture Memory &bull; 100% Free &amp; Offline &bull; KJV &amp; WEB Public Domain</p>
+  </footer>
+
+</body>
+</html>
