@@ -34,6 +34,11 @@ export default function VerseQuizScreen() {
   const flagQuizMiss = useAppStore((s) => s.flagQuizMiss);
   const recordVerseReview = useAppStore((s) => s.recordVerseReview);
   const recordQuizSession = useAppStore((s) => s.recordQuizSession);
+  const recordDailyActivity = useAppStore((s) => s.recordDailyActivity);
+
+  useEffect(() => {
+    void recordDailyActivity();
+  }, [recordDailyActivity]);
 
   const deckName =
     deckId === 'all' ? 'All Decks' : decks.find((d) => d.id === deckId)?.name ?? 'Deck';

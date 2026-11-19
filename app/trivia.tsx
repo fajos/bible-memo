@@ -68,6 +68,11 @@ export default function TriviaScreen() {
 
   const { colors } = useAppTheme();
   const recordQuizSession = useAppStore((s) => s.recordQuizSession);
+  const recordDailyActivity = useAppStore((s) => s.recordDailyActivity);
+
+  useEffect(() => {
+    void recordDailyActivity();
+  }, [recordDailyActivity]);
 
   // Keep questions completely stable during the session
   const [questions, setQuestions] = useState<TriviaQuestion[]>(() =>

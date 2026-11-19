@@ -140,7 +140,8 @@ async function getNativeDb(): Promise<SQLite.SQLiteDatabase> {
           date_key TEXT PRIMARY KEY NOT NULL,
           reviews_count INTEGER NOT NULL DEFAULT 0,
           quizzes_count INTEGER NOT NULL DEFAULT 0,
-          learned_count INTEGER NOT NULL DEFAULT 0
+          learned_count INTEGER NOT NULL DEFAULT 0,
+          visits_count INTEGER NOT NULL DEFAULT 0
         );
         CREATE TABLE IF NOT EXISTS badges (
           id TEXT PRIMARY KEY NOT NULL,
@@ -161,6 +162,9 @@ async function getNativeDb(): Promise<SQLite.SQLiteDatabase> {
       } catch {}
       try {
         await db.execAsync('ALTER TABLE verses ADD COLUMN tags TEXT;');
+      } catch {}
+      try {
+        await db.execAsync('ALTER TABLE daily_activity ADD COLUMN visits_count INTEGER NOT NULL DEFAULT 0;');
       } catch {}
       return db;
     })();
@@ -317,6 +321,7 @@ export async function initializeAndLoadSnapshot(): Promise<PersistedSnapshot> {
     reviews_count: number;
     quizzes_count: number;
     learned_count: number;
+    visits_count?: number;
   }>('SELECT * FROM daily_activity ORDER BY date_key ASC');
 
   const badgeRows = await db.getAllAsync<{
@@ -386,6 +391,7 @@ export async function initializeAndLoadSnapshot(): Promise<PersistedSnapshot> {
       reviewsCount: r.reviews_count,
       quizzesCount: r.quizzes_count,
       learnedCount: r.learned_count,
+      visitsCount: r.visits_count ?? 0,
     })),
     badges: badgeRows.map((r) => ({
       id: r.id,
@@ -496,11 +502,12 @@ export async function dbUpsertDailyActivity(activity: DailyActivity): Promise<vo
   if (Platform.OS === 'web') return;
   const db = await getNativeDb();
   await db.runAsync(
-    'INSERT OR REPLACE INTO daily_activity (date_key, reviews_count, quizzes_count, learned_count) VALUES (?, ?, ?, ?)',
+    'INSERT OR REPLACE INTO daily_activity (date_key, reviews_count, quizzes_count, learned_count, visits_count) VALUES (?, ?, ?, ?, ?)',
     activity.dateKey,
     activity.reviewsCount,
     activity.quizzesCount,
-    activity.learnedCount
+    activity.learnedCount,
+    activity.visitsCount ?? 0
   );
 }
 
@@ -616,11 +623,12 @@ export async function dbRestoreBackup(payload: BackupPayload): Promise<void> {
     }
     for (const a of payload.dailyActivity) {
       await db.runAsync(
-        'INSERT INTO daily_activity (date_key, reviews_count, quizzes_count, learned_count) VALUES (?, ?, ?, ?)',
+        'INSERT INTO daily_activity (date_key, reviews_count, quizzes_count, learned_count, visits_count) VALUES (?, ?, ?, ?, ?)',
         a.dateKey,
         a.reviewsCount,
         a.quizzesCount,
-        a.learnedCount
+        a.learnedCount,
+        a.visitsCount ?? 0
       );
     }
     for (const b of payload.badges) {

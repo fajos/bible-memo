@@ -89,6 +89,7 @@ export interface DailyActivity {
   reviewsCount: number;
   quizzesCount: number;
   learnedCount: number;
+  visitsCount?: number;
 }
 
 export interface UnlockedBadge {

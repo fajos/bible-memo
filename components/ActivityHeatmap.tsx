@@ -16,7 +16,13 @@ export function ActivityHeatmap({ activity }: ActivityHeatmapProps) {
   const activityMap = React.useMemo(() => {
     const map = new Map<string, number>();
     activity.forEach((a) => {
-      map.set(a.dateKey, (a.reviewsCount || 0) + (a.quizzesCount || 0) + (a.learnedCount || 0));
+      map.set(
+        a.dateKey,
+        (a.reviewsCount || 0) +
+          (a.quizzesCount || 0) +
+          (a.learnedCount || 0) +
+          (a.visitsCount || 0)
+      );
     });
     return map;
   }, [activity]);

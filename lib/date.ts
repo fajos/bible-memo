@@ -25,7 +25,7 @@ export function diffDaysBetweenKeys(earlierKey: string, laterKey: string): numbe
 
 export function formatShortWeekday(dateKey: string): string {
   const date = parseLocalDateKey(dateKey);
-  return ['S', 'M', 'T', 'W', 'T', 'F', 'S'][date.getDay()];
+  return ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'][date.getDay()];
 }
 
 export function formatTimeLabel(hour: number, minute: number): string {

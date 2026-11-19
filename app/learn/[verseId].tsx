@@ -41,7 +41,12 @@ export default function LearnVerseScreen() {
   const verses = useAppStore((s) => s.verses);
   const translation = useAppStore((s) => s.settings.translation);
   const recordVerseReview = useAppStore((s) => s.recordVerseReview);
+  const recordDailyActivity = useAppStore((s) => s.recordDailyActivity);
   const updateVerseNotes = useAppStore((s) => s.updateVerseNotes);
+
+  useEffect(() => {
+    void recordDailyActivity();
+  }, [recordDailyActivity]);
 
   const verse = verses.find((v) => v.id === verseId);
   const altTranslation = translation === 'KJV' ? 'WEB' : 'KJV';

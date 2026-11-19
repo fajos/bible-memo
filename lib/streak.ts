@@ -18,7 +18,13 @@ export function calculateStreak(
 ): StreakInfo {
   const activeSet = new Set(
     activities
-      .filter((a) => a.reviewsCount > 0 || a.quizzesCount > 0 || a.learnedCount > 0)
+      .filter(
+        (a) =>
+          (a.reviewsCount || 0) > 0 ||
+          (a.quizzesCount || 0) > 0 ||
+          (a.learnedCount || 0) > 0 ||
+          (a.visitsCount || 0) > 0
+      )
       .map((a) => a.dateKey)
   );
 

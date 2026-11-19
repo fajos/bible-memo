@@ -24,6 +24,11 @@ export default function DailyReviewScreen() {
   const translation = useAppStore((s) => s.settings.translation);
   const getDueVerses = useAppStore((s) => s.getDueVerses);
   const recordVerseReview = useAppStore((s) => s.recordVerseReview);
+  const recordDailyActivity = useAppStore((s) => s.recordDailyActivity);
+
+  useEffect(() => {
+    void recordDailyActivity();
+  }, [recordDailyActivity]);
 
   // Initialize review queue
   const initialDue = useMemo(() => getDueVerses(), [getDueVerses]);

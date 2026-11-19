@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { evaluateUnlockedBadgeIds } from '@/data/badges';
 import { exportBackupJsonAsync, pickAndParseBackupAsync } from '@/lib/backup';
 import { formatReference, getBookMeta } from '@/lib/bible';
-import { toLocalDateKey } from '@/lib/date';
+import { addDaysToDateKey, toLocalDateKey } from '@/lib/date';
 import {
   DEFAULT_SETTINGS,
   dbDeleteDeck,
@@ -72,6 +72,7 @@ interface AppState {
   }) => Promise<{ verse: MemorizedVerse; alreadyExists: boolean }>;
   deleteVerse: (verseId: string) => Promise<void>;
 
+  recordDailyActivity: (targetDateKey?: string) => Promise<void>;
   recordVerseReview: (
     verseId: string,
     rating: ReviewRating,
@@ -162,7 +163,64 @@ export const useAppStore = create<AppState>((set, get) => {
       set({ loading: true });
       try {
         const snap = await initializeAndLoadSnapshot();
-        const streak = calculateStreak(snap.dailyActivity);
+        const todayKey = toLocalDateKey();
+        const yesterdayKey = addDaysToDateKey(todayKey, -1);
+        const dayBeforeYesterdayKey = addDaysToDateKey(todayKey, -2);
+
+        let activityList = [...snap.dailyActivity];
+        const toUpsert: DailyActivity[] = [];
+
+        // Check if yesterday had no activity recorded, but user was active earlier (e.g. Tuesday active, Wednesday opened but missed tracking).
+        // Credit yesterday so streak is restored.
+        const yesterdayEntry = activityList.find((a) => a.dateKey === yesterdayKey);
+        const dayBeforeEntry = activityList.find((a) => a.dateKey === dayBeforeYesterdayKey);
+        const hadDayBeforeActivity =
+          dayBeforeEntry &&
+          ((dayBeforeEntry.reviewsCount || 0) > 0 ||
+            (dayBeforeEntry.quizzesCount || 0) > 0 ||
+            (dayBeforeEntry.learnedCount || 0) > 0 ||
+            (dayBeforeEntry.visitsCount || 0) > 0);
+
+        if (
+          hadDayBeforeActivity &&
+          (!yesterdayEntry ||
+            ((yesterdayEntry.reviewsCount || 0) === 0 &&
+              (yesterdayEntry.quizzesCount || 0) === 0 &&
+              (yesterdayEntry.learnedCount || 0) === 0 &&
+              (yesterdayEntry.visitsCount || 0) === 0))
+        ) {
+          const creditedYesterday: DailyActivity = {
+            dateKey: yesterdayKey,
+            reviewsCount: yesterdayEntry?.reviewsCount ?? 0,
+            quizzesCount: yesterdayEntry?.quizzesCount ?? 0,
+            learnedCount: yesterdayEntry?.learnedCount ?? 0,
+            visitsCount: Math.max(yesterdayEntry?.visitsCount ?? 0, 1),
+          };
+          activityList = yesterdayEntry
+            ? activityList.map((a) => (a.dateKey === yesterdayKey ? creditedYesterday : a))
+            : [...activityList, creditedYesterday];
+          toUpsert.push(creditedYesterday);
+        }
+
+        // Always record today's visit on app open
+        const todayEntry = activityList.find((a) => a.dateKey === todayKey);
+        const updatedToday: DailyActivity = {
+          dateKey: todayKey,
+          reviewsCount: todayEntry?.reviewsCount ?? 0,
+          quizzesCount: todayEntry?.quizzesCount ?? 0,
+          learnedCount: todayEntry?.learnedCount ?? 0,
+          visitsCount: (todayEntry?.visitsCount ?? 0) + 1,
+        };
+        activityList = todayEntry
+          ? activityList.map((a) => (a.dateKey === todayKey ? updatedToday : a))
+          : [...activityList, updatedToday];
+        toUpsert.push(updatedToday);
+
+        for (const item of toUpsert) {
+          await dbUpsertDailyActivity(item);
+        }
+
+        const streak = calculateStreak(activityList);
         set({
           initialized: true,
           loading: false,
@@ -170,7 +228,7 @@ export const useAppStore = create<AppState>((set, get) => {
           verses: snap.verses,
           reviewLogs: snap.reviewLogs,
           quizSessions: snap.quizSessions,
-          dailyActivity: snap.dailyActivity,
+          dailyActivity: activityList,
           badges: snap.badges,
           settings: snap.settings,
           streak,
@@ -279,6 +337,27 @@ export const useAppStore = create<AppState>((set, get) => {
       syncWeb();
     },
 
+    recordDailyActivity: async (targetDateKey?: string) => {
+      const dateKey = targetDateKey ?? toLocalDateKey();
+      const existingDay = get().dailyActivity.find((a) => a.dateKey === dateKey);
+      const updatedDay: DailyActivity = {
+        dateKey,
+        reviewsCount: existingDay?.reviewsCount ?? 0,
+        quizzesCount: existingDay?.quizzesCount ?? 0,
+        learnedCount: existingDay?.learnedCount ?? 0,
+        visitsCount: (existingDay?.visitsCount ?? 0) + 1,
+      };
+
+      set((state) => ({
+        dailyActivity: existingDay
+          ? state.dailyActivity.map((a) => (a.dateKey === dateKey ? updatedDay : a))
+          : [...state.dailyActivity, updatedDay],
+      }));
+
+      await dbUpsertDailyActivity(updatedDay);
+      await evaluateBadgesAndStreak();
+    },
+
     recordVerseReview: async (verseId, rating, mode) => {
       const target = get().verses.find((v) => v.id === verseId);
       if (!target) return;
@@ -302,6 +381,7 @@ export const useAppStore = create<AppState>((set, get) => {
         reviewsCount: (existingDay?.reviewsCount ?? 0) + 1,
         quizzesCount: existingDay?.quizzesCount ?? 0,
         learnedCount: (existingDay?.learnedCount ?? 0) + (becameLearned ? 1 : 0),
+        visitsCount: (existingDay?.visitsCount ?? 0) + 1,
       };
 
       set((state) => {
@@ -374,6 +454,7 @@ export const useAppStore = create<AppState>((set, get) => {
         reviewsCount: existingDay?.reviewsCount ?? 0,
         quizzesCount: (existingDay?.quizzesCount ?? 0) + 1,
         learnedCount: existingDay?.learnedCount ?? 0,
+        visitsCount: (existingDay?.visitsCount ?? 0) + 1,
       };
 
       set((state) => ({
