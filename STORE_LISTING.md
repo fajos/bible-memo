@@ -1,4 +1,4 @@
-# App Store & Google Play Store Listing Kit
+# App Store & Google Play Store Listing Kit (Clean Plain ASCII)
 **App Name:** Selah Scripture Memory  
 **Developer:** Femi Adeyemi / Fajostech  
 **Contact:** fajostech@gmail.com  
@@ -6,7 +6,7 @@
 
 ---
 
-## 🍎 Apple App Store (App Store Connect)
+## Apple App Store (App Store Connect)
 
 ### App Name (Max 30 characters)
 `Selah: Bible Verse Memory` (25 chars)  
@@ -34,12 +34,12 @@
 ### URLs
 - **Privacy Policy URL:** `https://fajos.github.io/bible-memo/privacy.html`
 - **Terms of Use URL:** `https://fajos.github.io/bible-memo/terms.html`
-- **Support URL:** `https://fajostech.com` (or `https://github.com/fajos/bible-memo/issues`)
+- **Support URL:** `https://fajostech.com`
 - **Marketing URL:** `https://fajostech.com`
 
 ---
 
-## 🤖 Google Play Store (Google Play Console)
+## Google Play Store (Google Play Console)
 
 ### App Name (Max 30 characters)
 `Selah Scripture Memory` (22 chars)
@@ -55,53 +55,53 @@
 
 ---
 
-## 📝 Full Description (For Both Apple App Store & Google Play Store)
-*(Formatted with clean paragraphs and bullet points, under 4,000 characters)*
+## Full Description (Plain ASCII - 100% App Store Connect Approved)
+*(Zero emojis, standard hyphens, straight quotes, no special symbols)*
 
-```markdown
-"Thy word have I hid in mine heart, that I might not sin against thee." — Psalm 119:11
+```text
+"Thy word have I hid in mine heart, that I might not sin against thee." - Psalm 119:11
 
 Selah Scripture Memory is a beautifully crafted, privacy-first, and 100% offline Bible memory utility designed to help Christians deeply internalize, meditate upon, and remember God's Word for a lifetime.
 
 Combining the scientifically proven SuperMemo SM-2 Spaced Repetition algorithm with engaging, multi-sensory study exercises, Selah transforms scripture memorization from a burdensome chore into a peaceful, daily spiritual habit.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✨ WHY CHOOSE SELAH SCRIPTURE MEMORY?
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---------------------------------
+WHY CHOOSE SELAH SCRIPTURE MEMORY?
+---------------------------------
 
-🧠 SCIENTIFIC SPACED REPETITION (SM-2)
+SCIENTIFIC SPACED REPETITION (SM-2)
 Never forget a verse again. Selah automatically calculates the ideal time to review each verse right before you are about to forget it. Spend less time reviewing what you already know and focus your energy where it matters most.
 
-✍️ SCRIPTURE TYPER RECALL
+SCRIPTURE TYPER RECALL
 Type directly into inline blanks to test your active recall word-by-word. Build rock-solid mental pathways with tactile haptic feedback and instant peek hints.
 
-🧩 INTERACTIVE STUDY MODES
+INTERACTIVE STUDY MODES
 Learn at your own pace through varied learning methods:
-• Word Scramble: Rebuild verses by placing scrambled words in correct biblical sequence.
-• Fill-in-the-Blank: Strengthen context awareness with intelligent multiple-choice distractors.
-• First-Letter Prompts: Train rapid recall using the first letter of each word.
-• Selah Meditation: Pause, breathe, and reflect on God’s Word with guided meditation timers and looped audio.
+- Word Scramble: Rebuild verses by placing scrambled words in correct biblical sequence.
+- Fill-in-the-Blank: Strengthen context awareness with intelligent multiple-choice options.
+- First-Letter Prompts: Train rapid recall using the first letter of each word.
+- Selah Meditation: Pause, breathe, and reflect on God's Word with guided meditation timers and looped audio.
 
-🎧 OFFLINE AUDIO NARRATION
+OFFLINE AUDIO NARRATION
 Listen to scripture read aloud with adjustable playback speed and looping. Perfect for hands-free meditation during your commute, walk, or quiet time.
 
-🎯 BIBLE TRIVIA & VERSE QUIZZES
+BIBLE TRIVIA AND VERSE QUIZZES
 Test and sharpen your biblical knowledge with hundreds of curated trivia questions spanning the Old and New Testaments, plus dynamic verse quizzes generated automatically from your custom decks.
 
-🛡️ 100% PRIVATE & OFFLINE-FIRST
-• No Accounts Required: Start memorizing immediately without signing up or logging in.
-• Zero Data Collection: Your study history, verses, notes, and streaks never leave your physical device.
-• No Ads & No Subscriptions: Enjoy an uninterrupted, reverent study experience completely free of charge.
+100% PRIVATE AND OFFLINE-FIRST
+- No Accounts Required: Start memorizing immediately without signing up or logging in.
+- Zero Data Collection: Your study history, verses, notes, and streaks never leave your physical device.
+- No Ads and No Subscriptions: Enjoy an uninterrupted, reverent study experience completely free of charge.
 
-📚 COMPLETE BIBLE SELECTOR & CUSTOM DECKS
-• Easily add any verse or passage across all 66 books of the Bible.
-• Create personalized decks for specific life topics: Peace, Faith, Armor of God, Hope, Parenting, and more.
-• Includes both King James Version (KJV) and World English Bible (WEB) public domain translations.
+COMPLETE BIBLE SELECTOR AND CUSTOM DECKS
+- Easily add any verse or passage across all 66 books of the Bible.
+- Create personalized decks for specific life topics: Peace, Faith, Armor of God, Hope, Parenting, and more.
+- Includes both King James Version (KJV) and World English Bible (WEB) public domain translations.
 
-🔥 GENTLE STREAKS & VISUAL PROGRESS
-Build lasting spiritual consistency with streak tracking protected by "Gentle Freeze"—a single missed day won’t wipe your hard-earned streak. Track your growth with a GitHub-style activity heatmap and unlock celebratory achievement badges.
+GENTLE STREAKS AND VISUAL PROGRESS
+Build lasting spiritual consistency with streak tracking protected by Gentle Freeze. A single missed day will not wipe your hard-earned streak. Track your growth with an activity heatmap and unlock celebratory achievement badges.
 
-💾 COMPLETE DATA CONTROL
+COMPLETE DATA CONTROL
 Export your entire database to a clean JSON backup file anytime or create local SQLite snapshots with a single tap.
 
 Download Selah Scripture Memory today and begin hiding God's Word in your heart!
@@ -109,16 +109,15 @@ Download Selah Scripture Memory today and begin hiding God's Word in your heart!
 
 ---
 
-## 💡 What's New in This Version (Release Notes / Version 1.0.0)
-*(Max 4,000 characters — typical 500 characters)*
+## Release Notes / What's New (Plain ASCII)
 
-```markdown
+```text
 Welcome to the initial release of Selah Scripture Memory!
 
-• Spaced Repetition (SM-2): Retain scripture permanently with smart review scheduling.
-• Scripture Typer: Test active recall word-by-word with inline blank space typing.
-• Multi-Sensory Study: Word Scramble, Fill-in-the-Blank, First-Letter Prompts, and Selah Audio Meditation.
-• Bible Quizzes & Trivia: Hundreds of curated biblical trivia questions and deck quizzes.
-• 100% Offline & Private: No accounts, no ads, zero tracking. KJV & WEB translations included.
-• Backup & Export: Full JSON backup and local SQLite snapshots.
+- Spaced Repetition (SM-2): Retain scripture permanently with smart review scheduling.
+- Scripture Typer: Test active recall word-by-word with inline blank space typing.
+- Multi-Sensory Study: Word Scramble, Fill-in-the-Blank, First-Letter Prompts, and Selah Audio Meditation.
+- Bible Quizzes and Trivia: Hundreds of curated biblical trivia questions and deck quizzes.
+- 100% Offline and Private: No accounts, no ads, zero tracking. KJV and WEB translations included.
+- Backup and Export: Full JSON backup and local SQLite snapshots.
 ```
