@@ -159,4 +159,14 @@ npx eas update --channel preview --message "Test new feature"
   - HTML Version: [docs/terms.html](docs/terms.html) / `https://fajos.github.io/bible-memo/terms.html`
 - **Landing Hub**: [docs/index.html](docs/index.html) / `https://fajos.github.io/bible-memo/`
 
+---
+
+## 👨‍💻 Developer & Contact
+
+- **Developer:** Femi Adeyemi / Fajostech
+- **Email:** [fajostech@gmail.com](mailto:fajostech@gmail.com)
+- **Website:** [https://fajostech.com](https://fajostech.com)
+- **GitHub:** [https://github.com/fajos/bible-memo](https://github.com/fajos/bible-memo)
+
+
 

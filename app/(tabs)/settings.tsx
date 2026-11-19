@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
+  Linking,
   Platform,
   Pressable,
   ScrollView,
@@ -562,8 +563,70 @@ export default function SettingsScreen() {
           </Pressable>
         </View>
 
+        {/* Developer & Contact */}
+        <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
+          DEVELOPER &amp; CONTACT
+        </Text>
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: colors.surface, borderColor: colors.border },
+          ]}>
+          <View style={styles.navRow}>
+            <View style={[styles.iconBox, { backgroundColor: colors.primarySoft }]}>
+              <Ionicons name="person-outline" size={20} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.navRowTitle, { color: colors.text }]}>Developer</Text>
+              <Text style={[styles.navRowSub, { color: colors.textSecondary }]}>
+                Femi Adeyemi / Fajostech
+              </Text>
+            </View>
+          </View>
+
+          <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+          <Pressable
+            onPress={() => void Linking.openURL('mailto:fajostech@gmail.com')}
+            style={({ pressed }) => [
+              styles.navRow,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}>
+            <View style={[styles.iconBox, { backgroundColor: colors.primarySoft }]}>
+              <Ionicons name="mail-outline" size={20} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.navRowTitle, { color: colors.text }]}>Email Support</Text>
+              <Text style={[styles.navRowSub, { color: colors.primary, fontWeight: '600' }]}>
+                fajostech@gmail.com
+              </Text>
+            </View>
+            <Ionicons name="open-outline" size={16} color={colors.textMuted} />
+          </Pressable>
+
+          <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+          <Pressable
+            onPress={() => void Linking.openURL('https://fajostech.com')}
+            style={({ pressed }) => [
+              styles.navRow,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}>
+            <View style={[styles.iconBox, { backgroundColor: colors.primarySoft }]}>
+              <Ionicons name="globe-outline" size={20} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.navRowTitle, { color: colors.text }]}>Official Website</Text>
+              <Text style={[styles.navRowSub, { color: colors.primary, fontWeight: '600' }]}>
+                https://fajostech.com
+              </Text>
+            </View>
+            <Ionicons name="open-outline" size={16} color={colors.textMuted} />
+          </Pressable>
+        </View>
+
         <Text style={[styles.footerNote, { color: colors.textMuted }]}>
-          Selah Scripture Memory • 100% Free & Offline • KJV & WEB Public Domain
+          Selah Scripture Memory • By Femi Adeyemi (Fajostech) • 100% Free &amp; Offline
         </Text>
       </ScrollView>
     </SafeAreaView>

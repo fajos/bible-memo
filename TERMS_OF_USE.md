@@ -81,7 +81,11 @@ We reserve the right to amend or replace these Terms at any time. When changes a
 
 ---
 
-## 10. Contact Information
+## 10. Developer & Contact Information
 
-For questions, bug reports, or legal inquiries regarding these Terms of Use, please submit an issue on the GitHub repository:  
-[https://github.com/fajos/bible-memo/issues](https://github.com/fajos/bible-memo/issues)
+For questions, bug reports, or inquiries regarding these Terms of Use, please contact:
+
+- **Developer:** Femi Adeyemi / Fajostech
+- **Email Support:** [fajostech@gmail.com](mailto:fajostech@gmail.com)
+- **Official Website:** [https://fajostech.com](https://fajostech.com)
+- **GitHub Repository & Issues:** [https://github.com/fajos/bible-memo](https://github.com/fajos/bible-memo)

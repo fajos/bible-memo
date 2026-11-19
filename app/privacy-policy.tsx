@@ -110,7 +110,7 @@ export default function PrivacyPolicyScreen() {
           </Text>
         </View>
 
-        {/* Section 5 & 6 */}
+        {/* Section 5 */}
         <View style={[styles.card, { backgroundColor: colors.surface, borderColor: colors.border }]}>
           <View style={styles.cardHeader}>
             <Ionicons name="heart-outline" size={20} color={colors.primary} />
@@ -118,6 +118,41 @@ export default function PrivacyPolicyScreen() {
           </View>
           <Text style={[styles.paragraphInCard, { color: colors.textSecondary }]}>
             Because Selah Scripture Memory collects zero personal information, displays zero ads, and contains zero in-app purchases, it is safe for users of all ages, including children under 13.
+          </Text>
+        </View>
+
+        {/* Section 6 - Developer & Contact */}
+        <View style={[styles.card, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+          <View style={styles.cardHeader}>
+            <Ionicons name="mail-outline" size={20} color={colors.primary} />
+            <Text style={[styles.cardTitle, { color: colors.text }]}>6. Developer &amp; Contact Information</Text>
+          </View>
+          <Text style={[styles.bullet, { color: colors.text }]}>
+            • <Text style={styles.bold}>Developer / Publisher:</Text> Femi Adeyemi / Fajostech
+          </Text>
+          <Text style={[styles.bullet, { color: colors.text }]}>
+            • <Text style={styles.bold}>Email:</Text>{' '}
+            <Text
+              onPress={() => void Linking.openURL('mailto:fajostech@gmail.com')}
+              style={{ color: colors.primary, fontWeight: '700' }}>
+              fajostech@gmail.com
+            </Text>
+          </Text>
+          <Text style={[styles.bullet, { color: colors.text }]}>
+            • <Text style={styles.bold}>Website:</Text>{' '}
+            <Text
+              onPress={() => void Linking.openURL('https://fajostech.com')}
+              style={{ color: colors.primary, fontWeight: '700' }}>
+              https://fajostech.com
+            </Text>
+          </Text>
+          <Text style={[styles.bullet, { color: colors.text }]}>
+            • <Text style={styles.bold}>Repository &amp; Issues:</Text>{' '}
+            <Text
+              onPress={() => void Linking.openURL('https://github.com/fajos/bible-memo/issues')}
+              style={{ color: colors.primary, fontWeight: '700' }}>
+              https://github.com/fajos/bible-memo
+            </Text>
           </Text>
         </View>
 

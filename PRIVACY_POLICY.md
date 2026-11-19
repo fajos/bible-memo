@@ -63,7 +63,11 @@ We may update this Privacy Policy from time to time to reflect new features or r
 
 ---
 
-## 8. Contact Us
+## 8. Developer & Contact Information
 
-If you have any questions or suggestions regarding this Privacy Policy, please open an issue on our GitHub repository:  
-[https://github.com/fajos/bible-memo/issues](https://github.com/fajos/bible-memo/issues)
+Selah Scripture Memory is developed and published by **Femi Adeyemi / Fajostech**.
+
+- **Developer:** Femi Adeyemi / Fajostech
+- **Email Support:** [fajostech@gmail.com](mailto:fajostech@gmail.com)
+- **Official Website:** [https://fajostech.com](https://fajostech.com)
+- **GitHub Repository & Issues:** [https://github.com/fajos/bible-memo](https://github.com/fajos/bible-memo)
