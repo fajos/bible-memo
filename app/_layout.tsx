@@ -109,6 +109,14 @@ function RootNavigator() {
           name="share-card"
           options={{ title: 'Share Verse Card', presentation: 'modal' }}
         />
+        <Stack.Screen
+          name="privacy-policy"
+          options={{ title: 'Privacy Policy', headerBackTitle: 'Settings' }}
+        />
+        <Stack.Screen
+          name="terms-of-use"
+          options={{ title: 'Terms of Use', headerBackTitle: 'Settings' }}
+        />
       </Stack>
       <BadgeBanner />
     </ThemeProvider>

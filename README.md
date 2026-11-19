@@ -148,3 +148,11 @@ npx eas update --channel preview --message "Test new feature"
 - **On App Launch**: The app automatically checks for and downloads new updates in the background. If a new update was downloaded, it will apply on next launch.
 - **Manual In-App Check**: Users can navigate to **Settings > Over-the-Air Updates** and tap **"Check for Updates Now"** or **"Restart & Apply Downloaded Update"**.
 - **Dev / Web**: Safely skipped in local development and web builds to ensure dev reload is unimpeded.
+
+---
+
+## 📜 Privacy & Terms
+
+- **[Privacy Policy](PRIVACY_POLICY.md)**: 100% offline-first, zero data collection, no account required, no third-party trackers.
+- **[Terms of Use](TERMS_OF_USE.md)**: Public domain scriptures (KJV & WEB), free & open terms.
+

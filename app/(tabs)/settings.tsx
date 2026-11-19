@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
   ActivityIndicator,
@@ -513,6 +514,54 @@ export default function SettingsScreen() {
           )}
         </View>
 
+        {/* Legal & Privacy */}
+        <Text style={[styles.sectionLabel, { color: colors.textSecondary }]}>
+          LEGAL &amp; PRIVACY
+        </Text>
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: colors.surface, borderColor: colors.border },
+          ]}>
+          <Pressable
+            onPress={() => router.push('/privacy-policy')}
+            style={({ pressed }) => [
+              styles.navRow,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}>
+            <View style={[styles.iconBox, { backgroundColor: colors.primarySoft }]}>
+              <Ionicons name="shield-checkmark-outline" size={20} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.navRowTitle, { color: colors.text }]}>Privacy Policy</Text>
+              <Text style={[styles.navRowSub, { color: colors.textSecondary }]}>
+                100% offline, zero data collection or tracking
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+          </Pressable>
+
+          <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+          <Pressable
+            onPress={() => router.push('/terms-of-use')}
+            style={({ pressed }) => [
+              styles.navRow,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}>
+            <View style={[styles.iconBox, { backgroundColor: colors.primarySoft }]}>
+              <Ionicons name="document-text-outline" size={20} color={colors.primary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.navRowTitle, { color: colors.text }]}>Terms of Use</Text>
+              <Text style={[styles.navRowSub, { color: colors.textSecondary }]}>
+                Public domain scripture, rights, and open terms
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.textMuted} />
+          </Pressable>
+        </View>
+
         <Text style={[styles.footerNote, { color: colors.textMuted }]}>
           Selah Scripture Memory • 100% Free & Offline • KJV & WEB Public Domain
         </Text>
@@ -575,5 +624,21 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     borderRadius: 13,
   },
+  navRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 4,
+  },
+  iconBox: {
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  navRowTitle: { fontSize: 15, fontWeight: '700' },
+  navRowSub: { fontSize: 12, marginTop: 1 },
+  divider: { height: StyleSheet.hairlineWidth, marginVertical: 12 },
   footerNote: { textAlign: 'center', fontSize: 12, marginTop: 10 },
 });
